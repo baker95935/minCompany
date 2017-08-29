@@ -1,0 +1,99 @@
+{layout name="layout" title="会员添加" /}
+ <form  id="defaultForm" role="form" method="POST"  action="{:url('/admin/user/add/')}">
+   <div class="form-group">
+    <label for="exampleInputUsername">用户名：</label>
+    <input type="text" class="form-control" value="{present name="data.username"}{$data.username}{/present} " name="username" id="username" placeholder="请输入您的用户名">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail">邮箱：</label>
+    <input type="email" class="form-control" name="email" value="{present name="data.email"}{$data.email}{/present}" id="email" placeholder="请输入您的邮箱地址">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail">用户组：</label>
+ 	<select name="group" id="group" class="form-control">
+ 	{foreach $listGroup as $vo}
+ 	<OPTION value="{$vo.id}"  {present name="data.group"}{if condition="$data.group eq $vo.id"} selected="selected" {/if} {/present}>{$vo.group_name}</OPTION>
+ 	{/foreach}
+ 	</select>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword">密码</label>
+    <input type="password" class="form-control"   name="password" id="password" placeholder="请输入您的密码">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword">确认密码</label>
+    <input type="password" class="form-control"   name="confirmPassword" id="confirmPassword" placeholder="请输入您的确认密码">
+  </div>
+  <input type="hidden" name="__token__" value="{$Request.token}" />
+  <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
+  <button type="submit" class="btn btn-default">提交</button>
+  <button type="reset" class="btn btn-default">重置</button>
+</form>	
+
+ <script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: '用户名必须填写'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '用户名最短6个字最长30个字'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: '用户名只能字母数字'
+                    }
+                }
+            },
+ 
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: '邮箱地址不能为空'
+                    },
+                    emailAddress: {
+                        message: '不是邮件地址'
+                    }
+                }
+            },
+ 
+     
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: '密码和确认密码不一致'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: '确认密码不能为空'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: '密码和确认密码不一致'
+                    }
+                }
+            },
+      
+        }
+    });
+});
+</script>

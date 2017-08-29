@@ -1,0 +1,40 @@
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">后台管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{:url('/admin/login/logout/')}">退出登录</a></li>
+            <li><a href="#">网站设置</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li {if condition="$nav eq 'Index'"}class="active" {/if}><a href="{:url('/admin/index/index/')}">后台首页 <span class="sr-only">(current)</span></a></li>
+            <li {if condition="$nav eq 'Setting'"}class="active" {/if}><a href="{:url('/admin/setting/index/')}">网站设置</a></li>
+            <li {if condition="$nav eq 'Link'"}class="active" {/if}><a href="{:url('/admin/link/index/')}">友情链接管理</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li {if condition="$nav eq 'ArticleType'"}class="active" {/if}><a href="{:url('/admin/articleType/index/')}">文章分类管理</a></li>
+            <li {if condition="$nav eq 'Article'"}class="active" {/if}><a href="{:url('/admin/article/index/')}">文章管理</a></li>
+            <li	{if condition="$nav eq 'ArticleComment'"}class="active" {/if}><a href="{:url('/admin/articleComment/')}">文章评论管理</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+           <li {if condition="$nav eq 'User'"}class="active" {/if}><a href="{:url('/admin/user/index/')}">会员管理</a></li>
+           <li {if condition="$nav eq 'UserGroup'"}class="active" {/if}><a href="{:url('/admin/userGroup/index/')}">会员组管理</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
