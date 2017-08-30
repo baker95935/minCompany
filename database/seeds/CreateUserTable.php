@@ -1,7 +1,7 @@
 <?php
 
 use think\migration\Seeder;
-use app\admin\model\User;
+use app\admin\model\Member;
 
 
 class CreateUserTable extends Seeder
@@ -17,12 +17,10 @@ class CreateUserTable extends Seeder
     public function run()
     {
     	for ($i=0; $i < 2; $i++) {
-    		User::create([
-    		'username'   => 'baker'.$i,
-    		'email'      => 'baker'.$i.'@qq.com',
-    		'password'   => md5("111111"),
-    		'group' => 1,
-    		'create_time'=>time(),
+    		Member::create([
+	    		'username'   => 'baker'.$i,
+	    		'password'   => md5("111111"),
+	    		'create_time'=>time(),
     		]);
     	}
     }
