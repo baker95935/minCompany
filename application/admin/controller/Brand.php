@@ -37,17 +37,16 @@ class Brand extends Common
 		if($request->method()=='POST') {
 			//数据获取
 			$data=array(
-				'username'=>$request->param('username'),
-				'password'=>md5($request->param('password')),
-				'confirmPassword'=>md5($request->param('confirmPassword')),
-				'realname'=>$request->param('realname'),
-				'phone'=>$request->param('phone'),
+				'name'=>$request->param('name'),
+				'location'=>$request->param('location'),
+				'title'=>$request->param('title'),
+				'content'=>$request->param('content'),
 				'status'=>$request->param('status'),
 				'id'=>$request->param('id'),
 			);
 			
 			//数据校验
-			$validate = validate('member');
+			$validate = validate('brand');
 			
 			if(!$validate->check($data)){
 				$this->error($validate->getError());
