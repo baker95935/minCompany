@@ -17,7 +17,7 @@ class Common extends Controller
 		$this->assign('nav',$nav);
 	 
 		//登录校验
-		if(!Session::has('username') || !Session::has('password') || Session::get('group')!=1)
+		if(!Session::has('username') || !Session::has('password') )
 		{
 			$this->redirect('/admin/login/login/');
 		}
