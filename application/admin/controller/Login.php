@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use app\admin\model\User as userModel;
+use app\admin\model\Member as memberModel;
 use think\Controller;
 use think\Session;
 
@@ -9,19 +9,18 @@ class Login extends Controller
 {
 	public function Login()
 	{
-		$user=new userModel();
+		$member=new memberModel();
 		$request = request();
 		$data=array();
 		
 		if($request->method()=='POST') {
-			$data['email']=$request->param('email');
+			$data['username']=$request->param('username');
 			$data['password']=md5($request->param('password'));
 		 
-			$user=new userModel();
-			$result=$user->validLogin($data);
+			$result=$member->validLogin($data);
 			
 			if($result) {
-				$this->success('登录成功', '/admin/user/index/');
+				$this->success('登录成功', '/admin/index/index/');
 			} 
 			$this->error('登录失败，请重试');
 			
