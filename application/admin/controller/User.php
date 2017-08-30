@@ -1,7 +1,6 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\User as userModel;
-use app\admin\model\UserGroup as userGroupModel;
 
 //用户表
 class User extends Common
@@ -27,7 +26,6 @@ class User extends Common
 	public function add()
 	{
 		$user=new userModel();
-		$userGroups=new userGroupModel();
 		$request = request();
 		
 		$id=$request->param('id');
@@ -72,10 +70,8 @@ class User extends Common
 			
 		$data=array();
 		!empty($id) && $data=UserModel::get($id);
-		$listGroup=$userGroups->getListInfo($where=array());
  
 		$this->assign('data',$data);
-		$this->assign('listGroup',$listGroup);
 		return view();
 	}
 	

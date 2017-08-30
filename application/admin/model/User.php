@@ -7,11 +7,6 @@ use think\Session;
 class User extends Model
 {
 
-	public function userGroup()
-	{
-		return $this->belongsTo('UserGroup','group');
-	}
-	
 	//新增,更新
 	public function addInfo($data,$where=array())
 	{
@@ -33,7 +28,7 @@ class User extends Model
 	public function getListInfo($where,$query)
 	{
 		$list=array();
-		$list = User::with('user_group')->where($where)->order('id desc')->paginate(array('list_rows'=>20,'query'=>$query)); // 分页的url额外参数);
+		$list = User::where($where)->order('id desc')->paginate(array('list_rows'=>20,'query'=>$query)); // 分页的url额外参数);
 		return $list;
 	}
 	

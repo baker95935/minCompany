@@ -18,4 +18,25 @@ return [
         ':name' => ['index/hello', ['method' => 'post']],
     ],
 
+    '[admin]'     => [
+	    'index'=>['admin/index/index'],
+	    
+	    'login/login'=>['admin/login/login'],
+	    'login/logout'=>['admin/login/logout'],
+	    
+	    'information/index'=>['admin/information/index'],
+	    'information/add'=>['admin/information/add'],
+	     
+	    'user/index'=>['admin/user/index'],
+	    'user/add'=>['admin/user/add'],
+	    
+	    'member/index'=>['admin/member/index'],
+	    'member/add'=>['admin/member/add'],
+ 
+	     
+	    'brand/index'=>['admin/brand/index'],
+	    'brand/add'=>['admin/brand/add'],
+	    
+	    'count/index'=>['admin/count/index'],
+    ],
 ];
