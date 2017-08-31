@@ -31,7 +31,7 @@ class CreateInfomationExtendTable extends Migrator
 	  $this->table('information_extend',['engine'=>'MyISAM'])
 	    ->addColumn(Column::string('title')->setUnique()->setComment('热点标题'))
 	    ->addColumn(Column::string('pic')->setComment('图片'))
-	    ->addColumn(Column::string('content')->setComment('信息内容'))
+	    ->addColumn(Column::text('content')->setComment('信息内容'))
 	    
 	    ->addColumn(Column::string('iid')->setComment('info表ID'))
 	    ->addColumn(Column::integer('create_time')->setComment('添加时间'))
