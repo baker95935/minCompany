@@ -27,7 +27,7 @@ class Information extends Model
 	public function getListInfo($where,$query)
 	{
 		$list=array();
-		$list = Brand::where($where)->order('id desc')->paginate(array('list_rows'=>20,'query'=>$query)); // 分页的url额外参数);
+		$list = Information::where($where)->order('id desc')->paginate(array('list_rows'=>20,'query'=>$query)); // 分页的url额外参数);
 		return $list;
 	}
 }

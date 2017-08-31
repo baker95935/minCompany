@@ -17,10 +17,11 @@ class Information extends Common
 		$request = request();
 		$search=$request->param('search');
 	 
-		!empty($search) && $where['title']=['like',"%".$search."%"];
+		!empty($search) && $where['name']=['like',"%".$search."%"];
 		$where['id']=['>',0];
 		
 		$list=$information->getListInfo($where,array('search'=>$search));
+ 
 		$this->assign('list',$list);
 		$this->assign('search',$search);
 		
@@ -37,24 +38,21 @@ class Information extends Common
 		if($request->method()=='POST') {
 			//数据获取
 			$data=array(
-				'username'=>$request->param('username'),
-				'password'=>md5($request->param('password')),
-				'confirmPassword'=>md5($request->param('confirmPassword')),
-				'realname'=>$request->param('realname'),
-				'phone'=>$request->param('phone'),
+				'name'=>$request->param('name'),
+				'location'=>$request->param('location'),
+				'car_model'=>$request->param('car_model'),
 				'status'=>$request->param('status'),
-				'id'=>$request->param('id'),
+				'iid'=>$request->param('iid'),
 			);
 			
 			//数据校验
-			$validate = validate('member');
+			$validate = 0;
 			
-			if(!$validate->check($data)){
+			if($validate){
 				$this->error($validate->getError());
 			
 			} else {
 				 
-				unset($data['confirmPassword']);
 				
 				$result=0;
 				if(empty($id)){//添加
@@ -76,6 +74,20 @@ class Information extends Common
 		$data=array();
 		!empty($id) && $data=informationModel::get($id);
  
+		$this->assign('data',$data);
+		return view();
+	}
+	
+	public function edit()
+	{
+		$information=new informationModel();
+		$request = request();
+		
+		$id=$request->param('id');
+		
+		$data=array();
+		!empty($id) && $data=informationModel::get($id);
+		
 		$this->assign('data',$data);
 		return view();
 	}

@@ -3,15 +3,15 @@
   
   <div class="form-group">
     <label for="exampleInputPassword">ID</label>
-    <input type="text" class="form-control"   name="iid" id="iid" placeholder="请输入ID">
+    <input type="text" class="form-control" value="{present name="data.iid"} {$data.iid} {/present}"  name="iid" id="iid" placeholder="请输入ID">
   </div>
    <div class="form-group">
     <label for="exampleInputPassword">信息名称</label>
-    <input type="text" class="form-control"   name="name" id="name" placeholder="请输入信息名称">
+    <input type="text" class="form-control"   name="name" id="name" value="{present name="data.name"} {$data.name} {/present}" placeholder="请输入信息名称">
   </div>
  <div class="form-group">
     <label for="exampleInputPassword">信息位置</label>
-   <input type="text" class="form-control"   name="location" id="location" placeholder="请输入信息位置">
+   <input type="text" class="form-control"   name="location" id="location" value="{present name="data.location"} {$data.location} {/present}" placeholder="请输入信息位置">
   </div>
   
    <div class="form-group">
@@ -22,8 +22,30 @@
  	<option value="VV5S">VV5S</option>
  	</select>
   </div>
+  <br>
+  <br>
+  <div id="list">
+  <div id="extend">
+    <div class="form-group">
+    <label for="exampleInputPassword">热点标题<font color=red> *</font></label>
+    <input type="text" class="form-control" value="{present name="data.title"} {$data.title} {/present}"  name="iid" id="iid" placeholder="请输入ID">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword">图       片 <font color=red> *</font></label>
+    <input type="text" class="form-control"   name="pic" id="pic" placeholder="请输入信息名称">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputPassword">信息内容<font color=red> *</font></label>
+    <TEXTAREA name="content" id="content"  class="form-control">{present name="data.content"}{$data.content}{/present}</TEXTAREA>
+  </div>
+  </div>
+  </div>
   
-  
+  <br>
+  <hr>
+  <a   onclick="addDiv();">添加一组信息</a>
+  <br>
+  <br>
  <div class="form-group">
     <label for="exampleInputEmail">状态：</label>
  	<select name="status" id="status" class="form-control">
@@ -35,6 +57,7 @@
   <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
   <button type="submit" class="btn btn-default">提交</button>
   <button type="reset" class="btn btn-default">重置</button>
+  <input type="hidden" name="divCount" id="divCount" value="1">
 </form>	
 
  <!-- 配置文件 -->
@@ -82,6 +105,28 @@ $(document).ready(function() {
         }
     });
 });
+
+
+function addDiv()
+{
+	var i=$('#divCount').val();
+	var div="<div id='extend"+i+"'>"
+	    +"<div class='form-group'>"
+	    +"<label for='exampleInputPassword'>热点标题<font color=red> *</font></label>"
+	    +"<input type='text' class='form-control'    name='iid"+i+"' id='iid"+i+"' placeholder='请输入ID'>"
+	    +"</div>"
+	    +"<div class='form-group'>"
+	    +"<label for='exampleInputPassword'>图       片 <font color=red> *</font></label>"
+	    +"<input type='text' class='form-control'   name='pic"+i+"' id='pic"+i+"' placeholder='请输入信息名称'>"
+	    +"</div>"
+	    +"<div class='form-group'>"
+	    +"<label for='exampleInputPassword'>信息内容<font color=red> *</font></label>"
+	    +"<TEXTAREA name='content"+i+"' id='content"+i+"'  class='form-control'></TEXTAREA>"
+	    +"</div>"
+	    +"</div>";
+	$('#extend').append(div);
+}
+
 </script>
  
 
