@@ -1,48 +1,21 @@
-{layout name="layout" title="品牌墙添加" /}
+{layout name="layout" title="信息管理" /}
  <form  id="defaultForm" role="form" method="POST" enctype="multipart/form-data" action="{:url('/admin/member/add/')}">
-   <div class="form-group">
-    <label for="exampleInputUsername">品牌墙名称</label>
-    <input type="text" class="form-control" value="{present name="data.username"}{$data.username}{/present} " name="name" id="name" placeholder="请输入名称">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword">品牌墙位置</label>
-    <input type="text" class="form-control"   name="location" id="location" placeholder="请输入位置">
-  </div>
-  
   
    <div class="form-group">
-    <label for="exampleInputPassword">热点标题</label>
+    <label for="exampleInputPassword">信息名称</label>
     <input type="text" class="form-control"   name="title" id="title" placeholder="请输入热点标题">
   </div>
  <div class="form-group">
-    <label for="exampleInputPassword">信息内容</label>
-   <TEXTAREA name="content" id="content"  class="form-control">{present name="data.content"}{$data.content}{/present}</TEXTAREA>
-  </div>
- <div class="form-group">
-    <label for="exampleInputPassword">视频-1图片 </label>
-    <input id="video1pic" name="uploadFiles[]"   type="file" >
-  </div>
-   <div class="form-group">
-    <label for="exampleInputPassword">视频-1 </label>
-    <input id="video1pic" name="uploadFiles[]"  type="file" >
+    <label for="exampleInputPassword">信息位置</label>
+   <input type="text" class="form-control"   name="location" id="location" placeholder="请输入热点标题">
   </div>
   
    <div class="form-group">
-    <label for="exampleInputPassword">视频-2图片 </label>
-    <input id="video2pic" name="uploadFiles[]"   type="file" >
-  </div>
-   <div class="form-group">
-    <label for="exampleInputPassword">视频-2 </label>
-    <input id="video2" name="uploadFiles[]"   type="file" >
-  </div>
-  
-   <div class="form-group">
-    <label for="exampleInputPassword">视频-3图片 </label>
-    <input id="video3pic" name="uploadFiles[]"   type="file" >
-  </div>
-   <div class="form-group">
-    <label for="exampleInputPassword">视频-3 </label>
-    <input id="video3" name="uploadFiles[]"   type="file" >
+    <label for="exampleInputPassword">车型 </label>
+   <select name="car_model" id="car_model" class="form-control">
+ 	<option value="1" {present name="data.status"}{if condition="$data.status eq 1"} selected="selected" {/if} {/present}>启用</option>
+ 	<option value="2" {present name="data.status"}{if condition="$data.status eq 2"} selected="selected" {/if} {/present}>禁用</option>
+ 	</select>
   </div>
   
   
