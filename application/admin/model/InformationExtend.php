@@ -28,6 +28,7 @@ class InformationExtend extends Model
 	{
 		$list=array();
 		$list = InformationExtend::where($where)->order('id desc')->paginate(array('list_rows'=>20,'query'=>$query)); // 分页的url额外参数);
+ 
 		return $list;
 	}
 }

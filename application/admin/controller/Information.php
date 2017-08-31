@@ -134,8 +134,9 @@ class Information extends Common
 		
 		$data=array();
 		!empty($id) && $data=informationModel::get($id);
-		
-		
+		$hotList=$infoE->getListInfo(array('iid'=>$data['id']),array());
+	 
+		$this->assign('hotList',$hotList);
 		$this->assign('data',$data);
 		return view();
 	}
@@ -155,6 +156,28 @@ class Information extends Common
 				$this->error('操作失败，请重试');
 			} else {
 				$this->success('操作成功', '/admin/information/index/');
+			}
+		}
+		
+		$this->error('非法操作，请重试');
+	}
+	
+	public function delE()
+	{
+		$infoE=new infoEModel();
+		$request = request();
+		
+		if($request->method()=='GET') {
+			
+			$id=$request->param('id');
+			$iid=$request->param('iid');
+			$result=0;
+			$result=$infoE->deleteInfo($id);
+			
+			if($result==0){
+				$this->error('操作失败，请重试');
+			} else {
+				$this->success('操作成功', '/admin/information/edit/id/'.$iid);
 			}
 		}
 		

@@ -24,6 +24,14 @@
   </div>
   <br>
   <br>
+  <div id="hasList">
+  <table>
+  {foreach $hotList as $vo}
+  <tr><td>热点标题：{$vo->title}</td><td>信息内容：{$vo->content}</td><td>图片<img height="50px" width="100px" src="__ROOT__{$vo->pic}"></td><td><a onclick="return  confirm('确定删除吗，操作不可逆')" href="{:url('/admin/information/delE/id/'.$vo->id.'/iid/'.$data.id)} ">删除</a></td></tr>
+  {/foreach}
+  </table>
+  </div>
+  
   <div id="list">
   <div id="extend">
     <div class="form-group">
