@@ -34,9 +34,15 @@ class User extends Common
 			//数据获取
 			$data=array(
 				'username'=>$request->param('username'),
-				'email'=>$request->param('email'),
 				'password'=>md5($request->param('password')),
 				'confirmPassword'=>md5($request->param('confirmPassword')),
+			
+				'shop_id'=>$request->param('shop_id'),
+				'shop_username'=>$request->param('shop_username'),
+				'realname'=>$request->param('realname'),
+				'phone'=>$request->param('phone'),
+				'status'=>$request->param('status'),
+			
 				'id'=>$request->param('id'),
 			);
 			

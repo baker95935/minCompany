@@ -10,7 +10,11 @@
      <tr>
        <th>ID</th>
        <th>用户名</th>
-       <th>邮箱</th>
+       <th>商城ID</th>
+       <th>商城用户名</th>
+       <th>真实姓名</th>
+       <th>电话</th>
+       <th>状态</th>
        <th>注册时间</th>
        <th>管理</th>
      </tr>
@@ -20,7 +24,11 @@
      <tr>
        <td>{$vo.id}</td>
        <td>{$vo.username}</td>
-       <td>{$vo.email}</td>
+       <td>{$vo.shop_id}</td>
+       <td>{$vo.shop_username}</td>
+       <td>{$vo.realname}</td>
+       <td>{$vo.phone}</td>
+       <td>{$vo.status|getStatusName}</td>
        <td>{$vo.create_time}</td>
        <td><a href="{:url('/admin/user/add/id/'.$vo->id)} ">编辑</a>  <a onclick="return  confirm('确定删除吗，操作不可逆')" href="{:url('/admin/user/del/id/'.$vo->id)} ">删除</a></td>
      </tr>
