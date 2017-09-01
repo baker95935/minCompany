@@ -5,6 +5,7 @@ namespace app\admin\controller;
 use app\admin\controller\Common;
 use think\Request;
 use app\admin\model\Brand as brandModel;
+use think\File;
 
 //品牌信息
 class Brand extends Common
@@ -12,15 +13,14 @@ class Brand extends Common
   public function index()
 	{
 		$list=array();
-		$members=new brandModel();
+		$brands=new brandModel();
 		
 		$request = request();
 		$search=$request->param('search');
 	 
-		!empty($search) && $where['username']=['like',"%".$search."%"];
 		$where['id']=['>',0];
 		
-		$list=$members->getListInfo($where,array('search'=>$search));
+		$list=$brands->getListInfo($where,array('search'=>$search));
 		$this->assign('list',$list);
 		$this->assign('search',$search);
 		
@@ -29,7 +29,7 @@ class Brand extends Common
 
 	public function add()
 	{
-		$member=new brandModel();
+		$brand=new brandModel();
 		$request = request();
 		
 		$id=$request->param('id');
@@ -42,28 +42,45 @@ class Brand extends Common
 				'title'=>$request->param('title'),
 				'content'=>$request->param('content'),
 				'status'=>$request->param('status'),
+				'video1'=>$request->param('video1'),
+				'video2'=>$request->param('video2'),
+				'video3'=>$request->param('video3'),
 				'id'=>$request->param('id'),
 			);
 			
-			//多文件上传处理
-			$files = request()->file('uploadFiles');
-			foreach($files as $file){
-				var_dump($file);
-				// 移动到框架应用根目录/public/uploads/ 目录下
+ 
+			//视频封面上传3个
+			$file = $request->file('video1pic');
+			if(!empty($file)) {
 				$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
 				if($info){
-					var_dump($info);
-					// 成功上传后 获取上传信息
-					// 输出 jpg
-					echo $info->getExtension();
-					// 输出 42a79759f284b767dfcb2a0197904287.jpg
-					echo $info->getFilename();
-				}else{
-					// 上传失败获取错误信息
-					echo $file->getError();
-				}
+			        $data['video1pic']="uploads/".$info->getSaveName();
+			    }
 			}
-			exit;
+			 
+		    
+	 
+			//视频封面上传3个
+			$file = $request->file('video2pic');
+			if(!empty($file)) {
+				$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+				if($info){
+			        $data['video2pic']="uploads/".$info->getSaveName();
+			    }
+			}
+			 
+		    
+	 
+			//视频封面上传3个
+			$file = $request->file('video3pic');
+			if(!empty($file)) {
+				$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+				if($info){
+			        $data['video3pic']="uploads/".$info->getSaveName();
+			    }
+			}
+		 
+		 
 			//数据校验
 			$validate = validate('brand');
 			
@@ -72,20 +89,19 @@ class Brand extends Common
 			
 			} else {
 				 
-				unset($data['confirmPassword']);
 				
 				$result=0;
 				if(empty($id)){//添加
 					$data['create_time']=time();
-					$result=$member->addInfo($data);
+					$result=$brand->addInfo($data);
 				} else {
-					$result=$member->addInfo($data,array('id'=>$id));//更新
+					$result=$brand->addInfo($data,array('id'=>$id));//更新
 				}
 				
 				if($result) {
-					$this->success('操作成功', '/admin/member/index/');
+					$this->success('操作成功', '/admin/brand/index/');
 				} else {
-					$this->success('操作失败或未生效请重试', '/admin/member/index/');
+					$this->success('操作失败或未生效请重试', '/admin/brand/index/');
 				}
 			}
 	

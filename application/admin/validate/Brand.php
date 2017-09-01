@@ -11,11 +11,8 @@ class Brand extends Validate
 		'title' =>  "require",
 		'content' => 'require',
 		'status' => 'require',
-		'video1pic' => 'require',
 		'video1' => 'require',
-		'video2pic' => 'require',
 		'video2' => 'require',
-		'video3pic' => 'require',
 		'video3' => 'require',
 		'__token__' => 'token',
 	];

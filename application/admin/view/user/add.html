@@ -8,14 +8,7 @@
     <label for="exampleInputEmail">邮箱：</label>
     <input type="email" class="form-control" name="email" value="{present name="data.email"}{$data.email}{/present}" id="email" placeholder="请输入您的邮箱地址">
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail">用户组：</label>
- 	<select name="group" id="group" class="form-control">
- 	{foreach $listGroup as $vo}
- 	<OPTION value="{$vo.id}"  {present name="data.group"}{if condition="$data.group eq $vo.id"} selected="selected" {/if} {/present}>{$vo.group_name}</OPTION>
- 	{/foreach}
- 	</select>
-  </div>
+ 
   <div class="form-group">
     <label for="exampleInputPassword">密码</label>
     <input type="password" class="form-control"   name="password" id="password" placeholder="请输入您的密码">

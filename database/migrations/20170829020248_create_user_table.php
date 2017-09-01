@@ -31,6 +31,11 @@ class CreateUserTable extends Migrator
 	  $this->table('user',['engine'=>'MyISAM'])
 	    ->addColumn(Column::string('username')->setUnique()->setComment('用户名'))
 	    ->addColumn(Column::string('password')->setComment('密码'))
+	    ->addColumn(Column::string('shop_id')->setComment('商城ID'))
+	    ->addColumn(Column::string('shop_username')->setComment('商城用户名'))
+	    ->addColumn(Column::string('realname')->setComment('真实姓名'))
+	    ->addColumn(Column::string('phone')->setComment('电话'))
+	    ->addColumn(Column::integer('status')->setComment('状态'))
 	    ->addColumn(Column::integer('create_time')->setComment('添加时间'))
 	    ->create();
 	}

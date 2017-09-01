@@ -35,7 +35,6 @@ class User extends Common
 			$data=array(
 				'username'=>$request->param('username'),
 				'email'=>$request->param('email'),
-				'group'=>$request->param('group'),
 				'password'=>md5($request->param('password')),
 				'confirmPassword'=>md5($request->param('confirmPassword')),
 				'id'=>$request->param('id'),

@@ -1,18 +1,18 @@
 {layout name="layout" title="品牌墙添加" /}
- <form  id="defaultForm" role="form" method="POST" enctype="multipart/form-data" action="{:url('/admin/member/add/')}">
+ <form  id="defaultForm" role="form" method="POST" enctype="multipart/form-data" action="{:url('/admin/brand/add/')}">
    <div class="form-group">
     <label for="exampleInputUsername">品牌墙名称</label>
-    <input type="text" class="form-control" value="{present name="data.username"}{$data.username}{/present} " name="name" id="name" placeholder="请输入名称">
+    <input type="text" class="form-control" value="{present name="data.name"}{$data.name}{/present}" name="name" id="name" placeholder="请输入名称">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword">品牌墙位置</label>
-    <input type="text" class="form-control"   name="location" id="location" placeholder="请输入位置">
+    <input type="text" class="form-control" value="{present name="data.location"}{$data.location}{/present}"   name="location" id="location" placeholder="请输入位置">
   </div>
   
   
    <div class="form-group">
     <label for="exampleInputPassword">热点标题</label>
-    <input type="text" class="form-control"   name="title" id="title" placeholder="请输入热点标题">
+    <input type="text" class="form-control" value="{present name="data.title"}{$data.title}{/present}"  name="title" id="title" placeholder="请输入热点标题">
   </div>
  <div class="form-group">
     <label for="exampleInputPassword">信息内容</label>
@@ -20,29 +20,32 @@
   </div>
  <div class="form-group">
     <label for="exampleInputPassword">视频-1图片 </label>
-    <input id="video1pic" name="uploadFiles[]"   type="file" >
+    {present name="data.video1pic"}<img src="__ROOT__{$data.video1pic}" width="100px" height="100px">{/present}
+    <input id="video1pic" name="video1pic"   type="file"   >
   </div>
    <div class="form-group">
     <label for="exampleInputPassword">视频-1 </label>
-    <input id="video1pic" name="uploadFiles[]"  type="file" >
+    <input id="video1" name="video1"  type="text" placeholder="请输入视频-1" value="{present name="data.video1"}{$data.video1}{/present}">
   </div>
   
    <div class="form-group">
     <label for="exampleInputPassword">视频-2图片 </label>
-    <input id="video2pic" name="uploadFiles[]"   type="file" >
+   {present name="data.video2pic"}<img src="__ROOT__{$data.video2pic}" width="100px" height="100px">{/present}
+    <input id="video2pic" name="video2pic"   type="file"  >
   </div>
    <div class="form-group">
     <label for="exampleInputPassword">视频-2 </label>
-    <input id="video2" name="uploadFiles[]"   type="file" >
+    <input id="video2" name="video2"   type="text" placeholder="请输入视频-2" value="{present name="data.video2"}{$data.video2}{/present}">
   </div>
   
    <div class="form-group">
     <label for="exampleInputPassword">视频-3图片 </label>
-    <input id="video3pic" name="uploadFiles[]"   type="file" >
+   {present name="data.video3pic"}<img src="__ROOT__{$data.video3pic}" width="100px" height="100px">{/present}
+    <input id="video3pic" name="video3pic"   type="file"  >
   </div>
    <div class="form-group">
     <label for="exampleInputPassword">视频-3 </label>
-    <input id="video3" name="uploadFiles[]"   type="file" >
+    <input id="video3" name="video3"   type="text" placeholder="请输入视频-3" value="{present name="data.video3"}{$data.video3}{/present}">
   </div>
   
   
@@ -105,13 +108,7 @@ $(document).ready(function() {
                     },
                 }
             },
-            video1pic: {
-                validators: {
-                    notEmpty: {
-                        message: '视频1封面不能为空'
-                    },
-                }
-            },
+          
             video1: {
                 validators: {
                     notEmpty: {
@@ -119,13 +116,7 @@ $(document).ready(function() {
                     },
                 }
             },
-            video2pic: {
-                validators: {
-                    notEmpty: {
-                        message: '视频2封面不能为空'
-                    },
-                }
-            },
+          
             video2: {
                 validators: {
                     notEmpty: {
@@ -133,13 +124,7 @@ $(document).ready(function() {
                     },
                 }
             },
-            video3pic: {
-                validators: {
-                    notEmpty: {
-                        message: '视频3封面不能为空'
-                    },
-                }
-            },
+          
             video3: {
                 validators: {
                     notEmpty: {
@@ -152,12 +137,5 @@ $(document).ready(function() {
     });
 });
 </script>
-<script>
-KindEditor.ready(function(K) {
-	editor = K.create('textarea[name="content"]', {
-		allowFileManager : true
-	});
-	 
-});
-</script>
+ 
 
