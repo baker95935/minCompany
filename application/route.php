@@ -39,4 +39,8 @@ return [
 	    
 	    'count/index'=>['admin/count/index'],
     ],
+    '[index]'     => [
+	    'login/login'=>['index/login/login'],
+		'login/logout'=>['index/login/logout'],
+    ]
 ];
