@@ -11,9 +11,19 @@ class User extends Common
 		$users=new userModel();
 		
 		$request = request();
-		$search=$request->param('search');
+		$search['id']=$request->param('id');
+		$search['username']=$request->param('username');
+		$search['shop_id']=$request->param('shop_id');
+		$search['shop_username']=$request->param('shop_username');
+		$search['realname']=$request->param('realname');
+		$search['phone']=$request->param('phone');
 	 
-		!empty($search) && $where['username']=['like',"%".$search."%"];
+		!empty($search['id']) && $where['id']=['=',$search['id']];
+		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
+		!empty($search['shop_id']) && $where['shop_id']=['like',"%".$search['shop_id']."%"];
+		!empty($search['realname']) && $where['realname']=['like',"%".$search['realname']."%"];
+		!empty($search['phone']) && $where['phone']=['like',"%".$search['phone']."%"];
+		
 		$where['id']=['>',0];
 		
 		$list=$users->getListInfo($where,array('search'=>$search));

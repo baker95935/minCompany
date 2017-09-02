@@ -1,7 +1,12 @@
 {layout name="layout" /}
 <h2>会员列表 &nbsp; &nbsp; &nbsp;<small><a href="{:url('/admin/user/add/')} ">添加会员</a></small></h2>
 <form action="{:url('/admin/User/index')}" method="POST">
-<input type="text" name="search" id="search" value="{$search}">
+ID:<input type="text" name="id" id="id" value="{$search.id}">
+用户名:<input type="text" name="username" id="username" value="{$search.username}">
+商城ID:<input type="text" name="shop_id" id="shop_id" value="{$search.shop_id}">
+商城用户名:<input type="text" name="shop_username" id="shop_username" value="{$search.shop_username}">
+真实姓名:<input type="text" name="realname" id="realname" value="{$search.realname}">
+电话:<input type="text" name="phone" id="phone" value="{$search.phone}">
 <input type="submit" value="查询">
 </form>
 <br>
