@@ -34,6 +34,13 @@ class User extends Model
 		return $list;
 	}
 	
+	//密码找回使用
+	public function getUserInfoByUsername($username)
+	{
+		$result=array();
+		return $result=User::where('username','=',$username)->find();
+	}
+	
 	//验证登录
 	public function validLogin($data) 
 	{

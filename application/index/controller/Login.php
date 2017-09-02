@@ -34,9 +34,45 @@ class Login extends Controller
      	return view();
      }
      
-     public function changepw()
+     public function forget()
      {
-     	echo 'changpw';
+     	$user=new userModel();
+		$request = request();
+		$data=array();
+		
+     	if($request->method()=='POST') {
+			$data=array(
+				'username'=>$request->param('username'),
+				'password'=>md5($request->param('password')),
+				'confirmPassword'=>md5($request->param('confirmPassword')),
+			
+			);
+			
+			//数据校验
+			$captcha=$request->param('captcha');
+			
+			$result=0;
+			
+			if(!captcha_check($captcha)){
+				$this->error('验证码错误');
+			
+			} else {
+				$userInfo=$user->getUserInfoByUsername($data['username']);
+				if(!empty($userInfo)) {
+					unset($data['confirmPassword']);
+					$result=$user->addInfo($data,array('id'=>$userInfo->id));//更新
+				} else {
+					$this->error('用户名不存在，请重试');
+				}
+			}
+			
+			if($result) {
+				$this->success('修改成功！', '/index/index/index/');
+			} 
+			$this->error('登录失败，请重试');
+			
+		}
+		
      	return view();
      }
      
@@ -74,11 +110,10 @@ class Login extends Controller
 			);
 			
 			//数据校验
-			$validate = validate('user');
 			$captcha=$request->param('captcha');
 			
 			if(!captcha_check($captcha)){
-				$this->error($validate->getError());
+				$this->error('验证码错误');
 			
 			} else {
 				 
