@@ -11,7 +11,7 @@ class Count extends Model
 	{
 		$result=0;
 		!empty($data) && $result=$this->save($data,$where);
-		return $result;
+ 		return $result;
 	}
 	
 	//删除

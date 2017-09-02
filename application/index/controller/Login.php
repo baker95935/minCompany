@@ -2,26 +2,59 @@
 
 namespace app\index\controller;
 
+use think\response\Redirect;
+
 use think\Controller;
 use think\Request;
+use think\Session;
 
-use app\admin\model\User as userModel;
+use app\index\model\User as userModel;
+use app\admin\model\Count as countModel;
 
 class Login extends Controller
 {
      public function login()
      {
-     	
+     	$user=new userModel();
+		$request = request();
+		$data=array();
+		
+		if($request->method()=='POST') {
+			$data['username']=$request->param('username');
+			$data['password']=md5($request->param('password'));
+		 
+			$result=$user->validLogin($data);
+			
+			if($result) {
+				$this->success('登录成功', '/index/index/index/');
+			} 
+			$this->error('登录失败，请重试');
+			
+		}
      	return view();
      }
      
      public function changepw()
      {
+     	echo 'changpw';
      	return view();
      }
      
      public function logout()
      {
+     	$countId=Session::get('countId');
+     	
+     	if($countId) {
+     		$data['end_time']=time();
+     		$count=new countModel();
+     		$count->addInfo($data,array('id'=>$countId));
+     	}
+     	
+     	Session::delete('username');
+		Session::delete('password');
+		
+		Session::clear();
+		$this->redirect('http://www.jd.com');
      	//退出登录，记载时间然后跳转
      }
      
