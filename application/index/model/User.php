@@ -58,7 +58,7 @@ class User extends Model
 				//登录成功之后 写入登录日志
 				$data=array(
 					'username'=>$dataInfo->username,
-				    'ipaddr'=>$_SERVER['REMOTE_ADDR'],
+				    'ipaddr'=>getIp(),
 					'start_time'=>time(),
 					'status'=>1,
 					'create_time'=>time(),
