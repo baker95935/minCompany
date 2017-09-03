@@ -20,6 +20,7 @@ function getStatusName($status)
 	return $name;
 }
 
+//字符串截取函数
 function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=false){
  if(function_exists("mb_substr")){
  if($suffix)
@@ -40,4 +41,31 @@ function msubstr($str, $start=0, $length, $charset="utf-8", $suffix=false){
  $slice = join("",array_slice($match[0], $start, $length));
  if($suffix) return $slice."…";
  return $slice;
+}
+
+function onlineTime($start_time,$end_time)
+{
+	$result=$res=0;
+	
+	if(!empty($start_time) && !empty($end_time)) {
+		$res=$end_time-$start_time;
+		$f=array(
+	        '31536000'=>'年',
+	        '2592000'=>'个月',
+	        '604800'=>'星期',
+	        '86400'=>'天',
+	        '3600'=>'小时',
+	        '60'=>'分钟',
+	        '1'=>'秒',
+    	);
+ 
+    	foreach($f as $k=>$v){
+	        if (0 !=$c=floor($res/(int)$k)) {
+	            return  $c.'&nbsp;'.$v;
+	        }
+    	}	
+		
+	}
+	
+	return $result;
 }
