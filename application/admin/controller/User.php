@@ -21,10 +21,11 @@ class User extends Common
 		!empty($search['id']) && $where['id']=['=',$search['id']];
 		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
 		!empty($search['shop_id']) && $where['shop_id']=['like',"%".$search['shop_id']."%"];
+		!empty($search['shop_username']) && $where['shop_username']=['like',"%".$search['shop_username']."%"];
 		!empty($search['realname']) && $where['realname']=['like',"%".$search['realname']."%"];
 		!empty($search['phone']) && $where['phone']=['like',"%".$search['phone']."%"];
 		
-		$where['id']=['>',0];
+		empty($where['id']) && $where['id']=['>',0];
 		
 		$list=$users->getListInfo($where,array('search'=>$search));
 		$this->assign('list',$list);

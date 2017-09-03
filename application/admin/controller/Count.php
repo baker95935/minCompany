@@ -24,11 +24,11 @@ class Count extends Common
 	 
 		!empty($search['id']) && $where['id']=['=',$search['id']];
 		!empty($search['username']) && $where['username']=['like',"%".$search['username']."%"];
-		!empty($search['ipaddr']) && $where['ipaddr']=['like',"%".$search['ipaddr']."%"];
-		!empty($search['start_time']) && $where['start_time']=['like',"%".$search['start_time']."%"];
-		!empty($search['end_time']) && $where['end_time']=['like',"%".$search['end_time']."%"];
+		!empty($search['ipaddr']) && $where['ipaddr']=['like',"'".$search['ipaddr']."'"];
+		!empty($search['start_time']) && $where['start_time']=['=',strtotime($search['start_time'])];
+		!empty($search['end_time']) && $where['end_time']=['=',strtotime($search['end_time'])];
 		
-		$where['id']=['>',0];
+		empty($where['id']) && $where['id']=['>',0];
 		
 		$list=$count->getListInfo($where,array('search'=>$search));
 		$this->assign('list',$list);

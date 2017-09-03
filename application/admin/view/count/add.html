@@ -12,12 +12,12 @@
   
   <div class="form-group">
     <label for="exampleInputEmail">访问时间：</label>
-    <input type="text" readonly  class="form-control form_datetime" name="start_time" value="{present name="data.start_time"}{$data.start_time|date='Y-m-d H:i:s',###}{/present}" id="start_time" placeholder="请输入您的访问时间">
+    <input type="text"   class="form-control form_datetime" name="start_time" value="{present name="data.start_time"}{$data.start_time|date='Y-m-d H:i:s',###}{/present}" id="start_time" placeholder="请输入您的访问时间">
   </div>
   
   <div class="form-group">
     <label for="exampleInputEmail">退出时间：</label>
-    <input type="text" readonly class="form-control form_datetime" name="end_time" value="{present name="data.end_time"}{$data.end_time|date='Y-m-d H:i:s',###}{/present}" id="end_time" placeholder="请输入您的退出时间">
+    <input type="text"   class="form-control form_datetime" name="end_time" value="{present name="data.end_time"}{$data.end_time|date='Y-m-d H:i:s',###}{/present}" id="end_time" placeholder="请输入您的退出时间">
   </div>
   
    <div class="form-group">
@@ -92,5 +92,5 @@ $(document).ready(function() {
 <script type="text/javascript" src="__ROOT__static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__ROOT__static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
-    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
 </script>  
