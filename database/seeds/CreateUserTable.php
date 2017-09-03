@@ -20,6 +20,7 @@ class CreateUserTable extends Seeder
 		Member::create([
     		'username'   => 'admin',
     		'password'   => md5("adminadmin"),
+    		'status'=>1,
     		'create_time'=>time(),
 		]);
    
