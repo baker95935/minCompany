@@ -41,12 +41,15 @@ class Member extends Model
 		if(!empty($data['username']) && !empty($data['password']))
 		{
 			$dataInfo=Member::where('username','=',$data['username'])->find();
-			if($data['password']==$dataInfo->password) 
-			{
-				Session::set('username',$dataInfo->username);
-				Session::set('password',md5($dataInfo->id.$dataInfo->password));
-				$result=1;
+			if(!empty($dataInfo)){
+				if($data['password']==$dataInfo->password) 
+				{
+					Session::set('username',$dataInfo->username);
+					Session::set('password',md5($dataInfo->id.$dataInfo->password));
+					$result=1;
+				}
 			}
+			
 		}
 		
 		return $result;
