@@ -132,7 +132,7 @@ class Information extends Common
 			 
 		}
 		
-		$data=array();
+		$data=$hotList=array();
 		!empty($id) && $data=informationModel::get($id);
 		$hotList=$infoE->getListInfo(array('iid'=>$data['id']),array());
 	 
