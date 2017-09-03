@@ -71,7 +71,7 @@ function onlineTime($start_time,$end_time)
 }
 
 
- public function getIp()
+ function getIp()
     {
 
         if(!empty($_SERVER["HTTP_CLIENT_IP"]))
