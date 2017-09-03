@@ -16,12 +16,12 @@ class CreateUserTable extends Seeder
      */
     public function run()
     {
-    	for ($i=0; $i < 2; $i++) {
-    		Member::create([
-	    		'username'   => 'baker'.$i,
-	    		'password'   => md5("111111"),
-	    		'create_time'=>time(),
-    		]);
-    	}
+   
+		Member::create([
+    		'username'   => 'admin',
+    		'password'   => md5("adminadmin"),
+    		'create_time'=>time(),
+		]);
+   
     }
 }
