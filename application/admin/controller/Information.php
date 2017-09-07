@@ -120,7 +120,7 @@ class Information extends Common
 				
 				
 			}
-			$infoE->saveAll($dbdata);//数据存储
+			!empty($dbdata) && $infoE->saveAll($dbdata);//数据存储
 			
 			$result=$information->addInfo($data,array('id'=>$id));//更新
 			
