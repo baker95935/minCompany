@@ -106,18 +106,18 @@ class Information extends Common
 				//图片上传
 				$ndata=array();
 				$file = $request->file('pic'.$i);
-				$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-				if($info){
+				!empty($file) && $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+				if(!empty($info)){
 			        $filepath="uploads/".$info->getSaveName();
+			        
+			        $dbdata[$i]=array(
+			        		'title'=>$request->param('title'.$i),
+			        		'content'=>$request->param('content'.$i),
+			        		'pic'=>$filepath,
+			        		'iid'=>$data['id'],
+			        		'create_time'=>time(),
+			        );
 			    }
-				$dbdata[$i]=array(
-					'title'=>$request->param('title'.$i),
-					'content'=>$request->param('content'.$i),
-					'pic'=>$filepath,
-					'iid'=>$data['id'],
-					'create_time'=>time(),
-				);
-				
 				
 			}
 			!empty($dbdata) && $infoE->saveAll($dbdata);//数据存储
