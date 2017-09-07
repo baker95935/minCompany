@@ -17,9 +17,10 @@
    <div class="form-group">
     <label for="exampleInputPassword">车型 </label>
    <select name="car_model" id="car_model" class="form-control">
- 	<option value="VV7C">VV7C</option>
- 	<option value="VV7S">VV7S</option>
- 	<option value="VV5S">VV5S</option>
+    <option value="" {present name="data.car_model"}{if condition="$data.car_model eq ''"} selected="selected" {/if} {/present}>不选</option>
+ 	<option value="VV7C" {present name="data.car_model"}{if condition="$data.car_model eq 'VV7C'"} selected="selected" {/if} {/present}>VV7C</option>
+ 	<option value="VV7S" {present name="data.car_model"}{if condition="$data.car_model eq 'VV7S'"} selected="selected" {/if} {/present}>VV7S</option>
+ 	<option value="VV5S" {present name="data.car_model"}{if condition="$data.car_model eq 'VV5S'"} selected="selected" {/if} {/present}>VV5S</option>
  	</select>
   </div>
   <br>
