@@ -82,6 +82,7 @@ class Login extends Controller
      	
      	if($countId) {
      		$data['end_time']=time();
+     		$data['is_click']=1;
      		$count=new countModel();
      		$count->addInfo($data,array('id'=>$countId));
      	}
