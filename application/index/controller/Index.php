@@ -28,6 +28,7 @@ class Index extends Controller
 		} else {
 			$data['end_time']=time();
      		$count=new countModel();
+     		$countId=Session::has('countId');
      		$count->addInfo($data,array('id'=>$countId));
 		}
 		
