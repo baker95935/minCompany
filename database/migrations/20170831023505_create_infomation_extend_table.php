@@ -29,7 +29,7 @@ class CreateInfomationExtendTable extends Migrator
 	public function up()
 	{
 	  $this->table('information_extend',['engine'=>'MyISAM'])
-	    ->addColumn(Column::string('title')->setUnique()->setComment('热点标题'))
+	    ->addColumn(Column::string('title')->setComment('热点标题'))
 	    ->addColumn(Column::string('pic')->setComment('图片'))
 	    ->addColumn(Column::text('content')->setComment('信息内容'))
 	    
