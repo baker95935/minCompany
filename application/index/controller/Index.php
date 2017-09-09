@@ -15,7 +15,6 @@ class Index extends Controller
 		//登录校验
 		if(!Session::has('countId'))
 		{
-			 var_dump('sdsd');
 			$data=array(
 			    'ipaddr'=>getIp(),
 				'start_time'=>time(),
