@@ -36,7 +36,7 @@ class Api extends Controller
 		if(!empty($id)) {
 	    	$data=$hotList=array();
 			$data=informationModel::get($id);
-			//$hotList=$infoE->getListInfo(array('iid'=>$data['id']),array());
+			$data['extend']=$infoE->getList(array('iid'=>$data['id']));
 		}
 		return jsonp($data);
     }

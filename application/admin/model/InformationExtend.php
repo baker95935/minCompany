@@ -31,4 +31,12 @@ class InformationExtend extends Model
  
 		return $list;
 	}
+	
+	//列表无分页
+	public function getList($where)
+	{
+		$list=array();
+		$list = InformationExtend::where($where)->order('id desc')->select();  
+		return $list;
+	}
 }
