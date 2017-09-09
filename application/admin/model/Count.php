@@ -30,4 +30,12 @@ class Count extends Model
 		$list = Count::where($where)->order('id desc')->paginate(array('list_rows'=>10,'query'=>$query)); // 分页的url额外参数);
 		return $list;
 	}
+	
+	//总计数
+	public function listCount($where)
+	{
+		$count=0;
+		$count=Count::where($where)->count();
+		return $count;
+	}
 }

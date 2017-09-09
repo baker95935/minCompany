@@ -30,6 +30,18 @@ class Count extends Common
 		
 		empty($where['id']) && $where['id']=['>',0];
 		
+		//一些统计信息
+		$countlist['id']=['>',0];
+		$totalCount=$count->listCount($countlist);
+		$countlist=array();
+		$countlist['is_click']=['=',1];
+		$clickCount=$count->listCount($countlist);
+		$per=($clickCount/$totalCount)*100;
+ 
+		$this->assign('totalCount',$totalCount);
+		$this->assign('clickCount',$clickCount);
+		$this->assign('per',$per);
+		
 		$list=$count->getListInfo($where,array('search'=>$search));
 		$this->assign('list',$list);
 		$this->assign('search',$search);
