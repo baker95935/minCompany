@@ -37,7 +37,7 @@ class Api extends Controller
 	    	$data=$hotList=array();
 			$data=informationModel::get($id);
 			$tmp=$infoE->getList(array('iid'=>$data['id']));
-			!empty($tmp) && $data['extend']=$tmp;
+			!empty($tmp) && $data['extends']=$tmp;
 		}
 		return jsonp($data);
     }
