@@ -3,6 +3,7 @@
 namespace app\admin\model;
 
 use think\Model;
+use think\Config;
 
 class InformationExtend extends Model
 {
@@ -36,7 +37,11 @@ class InformationExtend extends Model
 	public function getList($where)
 	{
 		$list=array();
+	 
 		$list = InformationExtend::where($where)->order('id desc')->select();  
+		foreach($list as $k=>&$v) {
+			!empty($v['pic']) && $v['pic']= Config::get('view_replace_str.__ROOT__').$v['pic'];
+		}
 		return $list;
 	}
 }
