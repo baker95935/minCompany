@@ -7,6 +7,7 @@ use think\Request;
 use app\admin\model\Information as informationModel;
 use app\admin\model\InformationExtend as infoEModel;
 use app\admin\model\Brand as brandModel;
+use think\Config;
 
 class Api extends Controller
 {
