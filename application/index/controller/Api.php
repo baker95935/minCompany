@@ -55,6 +55,9 @@ class Api extends Controller
         if(!empty($id)) {
             $data=array();
             $data=brandModel::get($id);
+            $data['video1pic']= Config::get('view_replace_str.__ROOT__').$data['video1pic'];
+            $data['video2pic']= Config::get('view_replace_str.__ROOT__').$data['video2pic'];
+            $data['video3pic']= Config::get('view_replace_str.__ROOT__').$data['video3pic'];
         }
         return jsonp($data);
     }
