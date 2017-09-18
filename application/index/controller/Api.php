@@ -54,7 +54,7 @@ class Api extends Controller
         $id=$request->param('id');
         if(!empty($id)) {
             $data=array();
-            $data=brand::get($id);
+            $data=brandModel::get($id);
         }
         return jsonp($data);
     }
