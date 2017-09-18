@@ -6,6 +6,7 @@ use think\Controller;
 use think\Request;
 use app\admin\model\Information as informationModel;
 use app\admin\model\InformationExtend as infoEModel;
+use app\admin\model\Brand as brandModel;
 
 class Api extends Controller
 {
@@ -42,5 +43,19 @@ class Api extends Controller
 		return jsonp($data);
     }
 
-  
+    
+    public function brand()
+    {
+        $brand=new brandModel();
+        $request = request();
+        
+        $result=array();
+        
+        $id=$request->param('id');
+        if(!empty($id)) {
+            $data=array();
+            $data=brand::get($id);
+        }
+        return jsonp($data);
+    }
 }
