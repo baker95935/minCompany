@@ -7,6 +7,7 @@ use think\Request;
 use app\admin\model\Information as informationModel;
 use app\admin\model\InformationExtend as infoEModel;
 use app\admin\model\Brand as brandModel;
+use app\admin\model\Count as countModel;
 use think\Config;
 
 class Api extends Controller
@@ -61,5 +62,31 @@ class Api extends Controller
             $data['video3pic']= Config::get('view_replace_str.__ROOT__').$data['video3pic'];
         }
         return jsonp($data);
+    }
+    
+    public function count()
+    {
+    	$count=new countModel();
+        $request = request();
+        
+        $result=array();
+        $result['code']=0;
+        $data=array();
+ 
+    	$data=array(
+			'ipaddr'=>$request->param('ipaddr'),
+			'start_time'=>$request->param('start_time'),
+			'username'=>$request->param('username'),
+		);
+		
+		if(!empty($data['ipaddr']) && $data['start_time']) {
+			$data['status']=1;
+			$data['create_time']=time();
+			$count->addInfo($data);
+			$countId=$count->id;
+			$result['code']=1;
+			$result['countId']=$countId;
+		}
+		return jsonp($result);
     }
 }
