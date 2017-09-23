@@ -1,0 +1,56 @@
+{layout name="layout" title="福袋添加" /}
+ <form  id="defaultForm" role="form" method="POST" enctype="multipart/form-data" action="{:url('/admin/luckybag/add/')}">
+   <div class="form-group">
+    <label for="exampleInputUsername">福袋名称</label>
+    <input type="text" class="form-control" value="{present name="data.name"}{$data.name}{/present}" name="name" id="name" placeholder="请输入名称">
+  </div>
+  
+   <div class="form-group">
+    <label for="exampleInputPassword">活动链接</label>
+    <input type="text" class="form-control" value="{present name="data.link"}{$data.link}{/present}"  name="link" id="link" placeholder="请输入活动链接">
+  </div>
+ <div class="form-group">
+    <label for="exampleInputPassword">图片 </label>
+    {present name="data.pic"}<img src="__ROOT__{$data.pic}" width="100px" height="100px">{/present}
+    <input id="pic" name="pic"   type="file"   >
+  </div>
+  <input type="hidden" name="__token__" value="{$Request.token}" />
+  <input type="hidden" name="id" id="id" value="{present name="data.id"}{$data.id}{/present}" />
+  <button type="submit" class="btn btn-default">提交</button>
+  <button type="reset" class="btn btn-default">重置</button>
+</form>	
+
+ <script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                message: 'The name is not valid',
+                validators: {
+                    notEmpty: {
+                        message: '名称必须填写'
+                    },
+                }
+            },
+ 
+            link: {
+                validators: {
+                    notEmpty: {
+                        message: '活动链接不能为空'
+                    },
+                    
+                }
+            },
+      
+        }
+    });
+});
+</script>
+ 
+
