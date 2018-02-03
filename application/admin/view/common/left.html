@@ -33,6 +33,13 @@
           <ul class="nav nav-sidebar">
            <li {if condition="$nav eq 'Member'"}class="active" {/if}><a href="{:url('/admin/member/index/')}">管理员</a></li>
           </ul>
+          
+          <ul class="nav nav-sidebar">
+            <li {if condition="$nav eq 'Scene'"}class="active" {/if}><a href="{:url('/admin/Scene/index/')}">场景</a></li>
+            <li {if condition="$nav eq 'Luckybag'"}class="active" {/if}><a href="{:url('/admin/Luckybag/index/')}">福袋</a></li>
+            <li {if condition="$nav eq 'Band'"}class="active" {/if}><a href="{:url('/admin/brand/index/')}">福袋统计报表</a></li>
+          </ul>
+          
         </div>
         
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
