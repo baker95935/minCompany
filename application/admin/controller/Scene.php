@@ -25,7 +25,7 @@ class Scene extends Common
 	}
 
 	public function add()
-	{
+	{  
 		$scene=new sceneModel();
 		$request = request();
 		

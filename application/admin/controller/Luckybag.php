@@ -8,7 +8,7 @@ use app\admin\model\Luckybag as luckybagModel;
 class Luckybag extends Common
 {
   public function index()
-	{
+	{    
 		$list=array();
 		$luckybag=new luckybagModel();
 		

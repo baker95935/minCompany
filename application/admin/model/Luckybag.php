@@ -6,7 +6,7 @@ use think\Model;
 
 class Luckybag extends Model
 {
-	//新增,更新
+	//新增,更新1
 	public function addInfo($data,$where=array())
 	{
 		$result=0;
