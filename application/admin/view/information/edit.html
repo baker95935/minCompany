@@ -42,7 +42,7 @@
      <tr>
        <td>{$vo.id}</td>
        <td>{$vo.title}</td>
-       <td>{$vo.content|msubstr=0,20,'utf-8',false}</td>
+       <td>{$vo.content}</td>
        <td><img height="50px" width="100px" src="__ROOT__{$vo->pic}"></td>
        <td>{$vo.create_time}</td>
        <td><a onclick="return  confirm('确定删除吗，操作不可逆')" href="{:url('/admin/information/delE/id/'.$vo->id.'/iid/'.$data.id)} ">删除</a></td>

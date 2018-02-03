@@ -133,4 +133,8 @@ class Login extends Controller
 		}
      	return view();
      }
+
+public function test(){
+	echo phpinfo();
+}
 }
