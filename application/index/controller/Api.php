@@ -8,6 +8,11 @@ use app\admin\model\Information as informationModel;
 use app\admin\model\InformationExtend as infoEModel;
 use app\admin\model\Brand as brandModel;
 use app\admin\model\Count as countModel;
+
+use app\admin\model\Scene as SceneModel;
+use app\admin\model\Luckybag as LuckybagModel;
+use app\admin\model\Luckybagcount as LuckybagcountModel;
+
 use think\Config;
 
 class Api extends Controller
@@ -89,4 +94,65 @@ class Api extends Controller
 		}
 		return jsonp($result);
     }
+    
+    //场景列表详情
+    public function scene()
+    {
+    	$scene=new SceneModel();
+    	$request = request();
+    	
+    	$id=$request->param('id');
+        if(!empty($id)) {
+            $data=array();
+            $data=$scene->find($id);
+        }
+        return jsonp($data);
+    }
+    
+    //福袋信息获取
+    public function luckybag()
+    {
+    	$bag=new LuckybagModel();
+    	$request = request();
+    	
+    	$id=$request->param('id');
+        if(!empty($id)) {
+            $data=array();
+             $data=$bag->find($id);
+            $data['pic']= Config::get('view_replace_str.__ROOT__').$data['pic'];
+        }
+        return jsonp($data);
+    }
+    
+    //福袋数据统计
+    public function luckybagcount()
+    {
+    	$count=new LuckybagcountModel();
+        $request = request();
+        
+        $result=array();
+        $result['code']=0;
+        $data=array();
+ 
+    	$data=array(
+			'ipaddr'=>$request->param('ipaddr'),
+			'scene_id'=>$request->param('scene_id'),
+			'luckybag_click'=>$request->param('luckybag_click'),
+			'adviser_click'=>$request->param('adviser_click'),
+			'testdrive_click'=>$request->param('testdrive_click'),
+			'buy_click'=>$request->param('buy_click'),
+			'activity_click'=>$request->param('activity_click'),
+			'finance_click'=>$request->param('finance_click'),
+			'substitution_click'=>$request->param('substitution_click'),
+		);
+		
+		if(!empty($data['ipaddr'])) {
+			$data['create_time']=time();
+			$count->addInfo($data);
+			$countId=$count->id;
+			$result['code']=1;
+			$result['countId']=$countId;
+		}
+		return jsonp($result);
+    } 
 }

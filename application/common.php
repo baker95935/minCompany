@@ -96,3 +96,14 @@ function onlineTime($start_time,$end_time)
 
         return $cip;
     }
+    
+    
+    //获取场景的ID
+    function getSceneNameById($id)
+    {
+     
+    	$scene=model('Scene');
+    	$tmp=$scene->find($id);
+     
+    	return $tmp['name'];
+    }
