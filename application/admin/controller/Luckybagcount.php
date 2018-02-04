@@ -118,9 +118,9 @@ class Luckybagcount extends Common
   		return view();
 	}
 	
-	public function excelluckybag($day)
+	public function excelluckybag()
 	{
-		
+		$day=request()->param('day');
 		$objPHPExcel = new PHPExcel();
 		
 		// Set document properties
@@ -150,10 +150,10 @@ class Luckybagcount extends Common
 	 		foreach($list as $k=>$v)
 	 		{
  				$objPHPExcel->setActiveSheetIndex(0)
-		            ->setCellValue('A'.$i,$v['day'])
-		            ->setCellValue('B'.$i,$v['ip'])
+		            ->setCellValue('A'.$i,date('Y-m-d H:i:s',$v['day']))
+		            ->setCellValue('B'.$i,$v['ipaddr'])
 		            ->setCellValue('C'.$i,$v['luckybag_click'])
-		            ->setCellValue('D'.$i,getSceneNameById($v['scene_id']))
+		            ->setCellValue('D'.$i,getSceneNameById($v['scene_id']));
 	 
 				$i++;
 	 		}
@@ -169,7 +169,7 @@ class Luckybagcount extends Common
 
 			// Redirect output to a client’s web browser (Excel5)
 			header('Content-Type: application/vnd.ms-excel');
-			header('Content-Disposition: attachment;filename="all.xls"');
+			header('Content-Disposition: attachment;filename="excel.xls"');
 			header('Cache-Control: max-age=0');
 			// If you're serving to IE 9, then the following may be needed
 			header('Cache-Control: max-age=1');

@@ -31,14 +31,14 @@ class CreateLuckybagcountTable extends Migrator
 		$this->table('luckybagcount',['engine'=>'MyISAM'])
     	->addColumn(Column::integer('create_time')->setComment('Ìí¼ÓÊ±¼ä'))
     	->addColumn(Column::string('ipaddr')->setComment('IPµØÖ·'))
-    	->addColumn(Column::integer('scene_id')->setComment('¸£´ü³¡¾°ID'))
-    	->addColumn(Column::integer('luckybag_click')->setComment('¸£´üµã»÷'))
-    	->addColumn(Column::integer('adviser_click')->setComment('¹ËÎÊµã»÷'))
-    	->addColumn(Column::integer('testdrive_click')->setComment('ÊÔ¼İµã»÷'))
-    	->addColumn(Column::integer('buy_click')->setComment('¶©¹ºµã»÷'))
-    	->addColumn(Column::integer('activity_click')->setComment('»î¶¯µã»÷'))
-    	->addColumn(Column::integer('finance_click')->setComment('½ğÈÚµã»÷'))
-    	->addColumn(Column::integer('substitution_click')->setComment('ÖÃ»»µã»÷'))
+    	->addColumn(Column::integer('scene_id')->setDefault(0)->setComment('¸£´ü³¡¾°ID'))
+    	->addColumn(Column::integer('luckybag_click')->setDefault(0)->setComment('¸£´üµã»÷'))
+    	->addColumn(Column::integer('adviser_click')->setDefault(0)->setComment('¹ËÎÊµã»÷'))
+    	->addColumn(Column::integer('testdrive_click')->setDefault(0)->setComment('ÊÔ¼İµã»÷'))
+    	->addColumn(Column::integer('buy_click')->setDefault(0)->setComment('¶©¹ºµã»÷'))
+    	->addColumn(Column::integer('activity_click')->setDefault(0)->setComment('»î¶¯µã»÷'))
+    	->addColumn(Column::integer('finance_click')->setDefault(0)->setComment('½ğÈÚµã»÷'))
+    	->addColumn(Column::integer('substitution_click')->setDefault(0)->setComment('ÖÃ»»µã»÷'))
     	->create();
     }
 }
