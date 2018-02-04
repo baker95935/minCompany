@@ -114,7 +114,7 @@ class Luckybagcount extends Common
 	    ->paginate(10);
   	 
   		$this->assign('list',$lucybaglist);
-  		$this->assign('day',$day)
+  		$this->assign('day',$day);
   		return view();
 	}
 	
@@ -138,7 +138,7 @@ class Luckybagcount extends Common
 			            ->setCellValue('A1', '日期')
 			            ->setCellValue('B1', 'IP')
 			            ->setCellValue('C1', '福袋点击量')
-			            ->setCellValue('D1', '福袋位置')
+			            ->setCellValue('D1', '福袋位置');
  
 
  	  		$list=	Db::table('luckybagcount')
