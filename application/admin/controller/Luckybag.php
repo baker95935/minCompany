@@ -36,6 +36,7 @@ class Luckybag extends Common
 			$data=array(
 				'name'=>$request->param('name'),
 				'link'=>$request->param('link'),
+				'is_show'=>$request->param('is_show'),
 				'id'=>$request->param('id'),
 			);
 			

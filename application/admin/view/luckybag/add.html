@@ -5,6 +5,12 @@
     <input type="text" class="form-control" value="{present name="data.name"}{$data.name}{/present}" name="name" id="name" placeholder="请输入名称">
   </div>
   
+  <div class="form-group">
+    <label for="exampleInputUsername">显示：</label>
+     <input  type="radio" name="is_show" value="1" {notpresent name="data.is_show"} checked {/notpresent} {present name="data.is_show"} {if condition="$data.is_show eq 1 "} checked  {/if} {/present}  />是</label>
+	  <input  type="radio" name="is_show" value="2" {present name="data.is_show"} {if condition="$data.is_show eq 2 "} checked  {/if} {/present}  />否</label>
+  </div>
+  
    <div class="form-group">
     <label for="exampleInputPassword">活动链接</label>
     <input type="text" class="form-control" value="{present name="data.link"}{$data.link}{/present}"  name="link" id="link" placeholder="请输入活动链接">

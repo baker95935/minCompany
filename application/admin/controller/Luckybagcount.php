@@ -11,18 +11,33 @@ use PHPExcel;
 use app\admin\controller\Common;
 
 use app\admin\model\Luckybagcount as luckybagcountModel;
+use app\admin\model\Luckybag as luckybagModel;
 
 class Luckybagcount extends Common
 {
      public function index()
 	{
+		$request=request();
+		
 		$list=array();
+		
+		$sceneList=Db::table('scene')->select();
+		$this->assign('sceneList',$sceneList);
+		
+		$scene_id=$request->param('scene_id');
+		$data=array();
+		!empty($scene_id) && $data['scene_id']=$scene_id;
+		$this->assign('scene_id',$scene_id);
 
-	  	$list=	Db::table('luckybagcount')
-	    ->field('DATE(FROM_UNIXTIME(create_time)) AS day,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
-	    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
-	    ->paginate(10);
-  		
+	 
+			$list=	Db::table('luckybagcount')
+		    ->field('DATE(FROM_UNIXTIME(create_time)) AS day,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
+		    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
+		    ->where($data)
+		    ->paginate(10);
+		    
+	  
+	 
   		$this->assign('list',$list);
 		return view();
 	}
@@ -30,6 +45,11 @@ class Luckybagcount extends Common
 	public function excelAll()
 	{
 		$objPHPExcel = new PHPExcel();
+		$request=request();
+		
+		$scene_id=$request->param('scene_id');
+		$data=array();
+		!empty($scene_id) && $data['scene_id']=$scene_id;
 		
 		// Set document properties
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
@@ -44,35 +64,45 @@ class Luckybagcount extends Common
 			// Add some data
 			$objPHPExcel->setActiveSheetIndex(0)
 			            ->setCellValue('A1', '日期')
-			            ->setCellValue('B1', '流量(PV)')
-			            ->setCellValue('C1', '访客量(uv)')
-			            ->setCellValue('D1', '福袋点击量')
-					    ->setCellValue('E1', '顾问点击量')
-					    ->setCellValue('F1', '试驾点击量')
-					    ->setCellValue('G1', '订购点击量')
-					    ->setCellValue('H1', '活动点击量')
-					    ->setCellValue('I1', '金融点击量')
-					    ->setCellValue('J1', '置换点击量');
+			            ->setCellValue('B1', '场景')
+			            ->setCellValue('C1', '流量(PV)')
+			            ->setCellValue('D1', '访客量(uv)')
+			            ->setCellValue('E1', '福袋点击量')
+					    ->setCellValue('F1', '顾问点击量')
+					    ->setCellValue('G1', '试驾点击量')
+					    ->setCellValue('H1', '订购点击量')
+					    ->setCellValue('I1', '活动点击量')
+					    ->setCellValue('J1', '金融点击量')
+					    ->setCellValue('K1', '置换点击量');
 
  	  		$list=	Db::table('luckybagcount')
 		    ->field('DATE(FROM_UNIXTIME(create_time)) AS day,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
 		    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
+		    ->where($data)
 	 		->select();
 	 		
 	 		$i=2;
+	 		$scene_name='全部';
+	 		if($scene_id) {
+	 			$tmp=luckybagModel::get($scene_id);
+	 			$scene_name=$tmp['name'];
+	 		}
+	 		
+	 		
 	 		foreach($list as $k=>$v)
 	 		{
  				$objPHPExcel->setActiveSheetIndex(0)
 		            ->setCellValue('A'.$i,$v['day'])
-		            ->setCellValue('B'.$i,$v['pv'])
-		            ->setCellValue('C'.$i,$v['uv'])
-		            ->setCellValue('D'.$i,$v['luckybag_click_total'])
-				    ->setCellValue('E'.$i,$v['adviser_click_total'])
-				    ->setCellValue('F'.$i,$v['testdrive_click_total'])
-				    ->setCellValue('G'.$i,$v['buy_click_total'])
-				    ->setCellValue('H'.$i,$v['activity_click_total'])
-				    ->setCellValue('I'.$i,$v['finance_click_total'])
-				    ->setCellValue('J'.$i,$v['substitution_click_total']);	
+		            ->setCellValue('B'.$i,$scene_name)
+		            ->setCellValue('C'.$i,$v['pv'])
+		            ->setCellValue('D'.$i,$v['uv'])
+		            ->setCellValue('E'.$i,$v['luckybag_click_total'])
+				    ->setCellValue('F'.$i,$v['adviser_click_total'])
+				    ->setCellValue('G'.$i,$v['testdrive_click_total'])
+				    ->setCellValue('H'.$i,$v['buy_click_total'])
+				    ->setCellValue('I'.$i,$v['activity_click_total'])
+				    ->setCellValue('J'.$i,$v['finance_click_total'])
+				    ->setCellValue('K'.$i,$v['substitution_click_total']);	
 				$i++;
 	 		}
  

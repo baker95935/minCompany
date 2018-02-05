@@ -95,7 +95,7 @@ class Api extends Controller
 		return jsonp($result);
     }
     
-    //场景列表详情
+    //场景详情
     public function scene()
     {
     	$scene=new SceneModel();
@@ -137,6 +137,7 @@ class Api extends Controller
     	$data=array(
 			'ipaddr'=>$request->param('ipaddr'),
 			'scene_id'=>$request->param('scene_id'),
+			'luckybag_id'=>$request->param('luckybag_id'),
 			'luckybag_click'=>$request->param('luckybag_click'),
 			'adviser_click'=>$request->param('adviser_click'),
 			'testdrive_click'=>$request->param('testdrive_click'),
@@ -145,6 +146,16 @@ class Api extends Controller
 			'finance_click'=>$request->param('finance_click'),
 			'substitution_click'=>$request->param('substitution_click'),
 		);
+		
+		empty($data['scene_id']) && $data['scene_id']=0;
+		empty($data['luckybag_click']) && $data['luckybag_click']=0;
+		empty($data['adviser_click']) && $data['adviser_click']=0;
+		empty($data['testdrive_click']) && $data['testdrive_click']=0;
+		empty($data['buy_click']) && $data['buy_click']=0;
+		empty($data['activity_click']) && $data['activity_click']=0;
+		empty($data['finance_click']) && $data['finance_click']=0;
+		empty($data['substitution_click']) && $data['substitution_click']=0;
+		
 		
 		if(!empty($data['ipaddr'])) {
 			$data['create_time']=time();
