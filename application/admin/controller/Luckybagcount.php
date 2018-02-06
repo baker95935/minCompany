@@ -139,7 +139,7 @@ class Luckybagcount extends Common
 		$lucybaglist=array();
 	 
 		$lucybaglist=Db::table('luckybagcount')
-	    ->field('create_time AS day,ipaddr,luckybag_click,scene_id')
+	    ->field('create_time AS day,ipaddr,luckybag_click,scene_id,luckybag_id')
 	    ->where(array('DATE(FROM_UNIXTIME(create_time))'=>$day,'luckybag_click'=>1))
 	    ->paginate(10);
   	 

@@ -18,7 +18,7 @@
      <tr>
        <td>{$vo.day|date='Y-m-d H:i:s',###}</td>
        <td>{$vo.ipaddr}</td>
-       <td>{$vo.luckybag_id|getLuckybagNameById}</td>
+       <td>{if condition="$vo.luckybag_id gt 0"}{$vo.luckybag_id|getLuckybagNameById}{else/}空{/if}</td>
        <td>{$vo.luckybag_click}</td>
        <td>{$vo.scene_id|getSceneNameById}</td>
      </tr>
