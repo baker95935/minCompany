@@ -155,6 +155,7 @@ class Api extends Controller
 		empty($data['activity_click']) && $data['activity_click']=0;
 		empty($data['finance_click']) && $data['finance_click']=0;
 		empty($data['substitution_click']) && $data['substitution_click']=0;
+        empty($data['luckybag_id']) && $data['luckybag_id']=0;
 		
 		
 		if(!empty($data['ipaddr'])) {
