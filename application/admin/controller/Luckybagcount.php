@@ -183,7 +183,7 @@ class Luckybagcount extends Common
  				$objPHPExcel->setActiveSheetIndex(0)
 		            ->setCellValue('A'.$i,date('Y-m-d H:i:s',$v['day']))
 		            ->setCellValue('B'.$i,$v['ipaddr'])
-		            ->setCellValue('C'.$i,$v['luckybag_id']|getLuckybagNameById)
+		            ->setCellValue('C'.$i,getLuckybagNameById($v['luckybag_id']))
 		            ->setCellValue('D'.$i,$v['luckybag_click'])
 		            ->setCellValue('E'.$i,getSceneNameById($v['scene_id']));
 	 
