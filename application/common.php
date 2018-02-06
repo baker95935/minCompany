@@ -107,3 +107,14 @@ function onlineTime($start_time,$end_time)
      
     	return $tmp['name'];
     }
+    
+
+    //获取福袋的名称
+    function getLuckybagNameById($id)
+    {
+    	 
+    	$scene=model('Luckybag');
+    	$tmp=$scene->find($id);
+    	 
+    	return $tmp['name'];
+    }

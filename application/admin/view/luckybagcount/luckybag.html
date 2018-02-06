@@ -8,6 +8,7 @@
      <tr>
        <th>日期</th>
        <th>IP</th>
+       <th>福袋名称</th>
        <th>福袋点击量</th>
        <th>福袋位置</th>
      </tr>
@@ -17,6 +18,7 @@
      <tr>
        <td>{$vo.day|date='Y-m-d H:i:s',###}</td>
        <td>{$vo.ipaddr}</td>
+       <td>{$vo.luckybag_id|getLuckybagNameById}</td>
        <td>{$vo.luckybag_click}</td>
        <td>{$vo.scene_id|getSceneNameById}</td>
      </tr>

@@ -167,12 +167,13 @@ class Luckybagcount extends Common
 			$objPHPExcel->setActiveSheetIndex(0)
 			            ->setCellValue('A1', '日期')
 			            ->setCellValue('B1', 'IP')
-			            ->setCellValue('C1', '福袋点击量')
-			            ->setCellValue('D1', '福袋位置');
+			            ->setCellValue('C1', '福袋名称')
+			            ->setCellValue('D1', '福袋点击量')
+			            ->setCellValue('E1', '福袋位置');
  
 
  	  		$list=	Db::table('luckybagcount')
-    				->field('create_time AS day,ipaddr,luckybag_click,scene_id')
+    				->field('create_time AS day,ipaddr,luckybag_id,luckybag_click,scene_id')
 	    			->where(array('DATE(FROM_UNIXTIME(create_time))'=>$day,'luckybag_click'=>1))
 	 				->select();
 	 		
@@ -182,8 +183,9 @@ class Luckybagcount extends Common
  				$objPHPExcel->setActiveSheetIndex(0)
 		            ->setCellValue('A'.$i,date('Y-m-d H:i:s',$v['day']))
 		            ->setCellValue('B'.$i,$v['ipaddr'])
-		            ->setCellValue('C'.$i,$v['luckybag_click'])
-		            ->setCellValue('D'.$i,getSceneNameById($v['scene_id']));
+		            ->setCellValue('C'.$i,$v['luckybag_id']|getLuckybagNameById)
+		            ->setCellValue('D'.$i,$v['luckybag_click'])
+		            ->setCellValue('E'.$i,getSceneNameById($v['scene_id']));
 	 
 				$i++;
 	 		}
