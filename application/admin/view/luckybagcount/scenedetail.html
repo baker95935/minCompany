@@ -39,7 +39,7 @@
  
    {foreach $list as $vo}
      <tr>
-       <td><a href="{:url('/admin/Luckybagcount/sceneDetail/'.$vo.scene_id)}">{$vo.scene_id|getSceneNameById}</a></td>
+       <td>{$vo.scene_id|getSceneNameById}</td>
        <td>{$vo.day}</td>
        <td>{$vo.pv}</td>
        <td>{$vo.uv}</td>
