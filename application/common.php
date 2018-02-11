@@ -101,11 +101,12 @@ function onlineTime($start_time,$end_time)
     //获取场景的ID
     function getSceneNameById($id)
     {
-     
+     	$res='其他';
     	$scene=model('Scene');
     	$tmp=$scene->find($id);
+    	!empty($tmp['name']) && $res=$tmp['name'];
      
-    	return $tmp['name'];
+    	return $res;
     }
     
 

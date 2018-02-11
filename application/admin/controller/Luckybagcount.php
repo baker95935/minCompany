@@ -139,7 +139,7 @@ class Luckybagcount extends Common
 
 			$list=	Db::table('luckybagcount')
 		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
-		    ->group('scene_id DESC')
+		    ->group('scene_id ASC')
 		    ->where($data)
 	 		->select();
 	 		
