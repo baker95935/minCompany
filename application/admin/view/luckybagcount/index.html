@@ -10,6 +10,10 @@
 <option value="{$item.id}" {if condition="$scene_id eq $item.id"} selected="selected" {/if} >{$item.name}</option>
 {/foreach}
 </select>
+&nbsp;&nbsp;
+时间:<input   class="form_datetime" type="text" name="stime" id="start_time" value="{$stime}">~
+<input   class="form_datetime" type="text" name="etime" id="end_time" value="{$etime}">
+
 <input type="submit" value="查询">
 </form> 
 <br>  
@@ -57,5 +61,15 @@
 <script type="text/javascript" src="__ROOT__static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__ROOT__static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
-    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii:ss'});
+    $(".form_datetime").datetimepicker({　
+    	　　format: 'yyyy-mm-dd',
+    　　　　　　language: 'zh-CN',
+    　　　　　　weekStart: 1,
+    　　　　　　todayBtn: 1,//显示‘今日’按钮
+    　　　　　　autoclose: 1,
+    　　　　　　todayHighlight: 1,
+    　　　　　　startView: 2,
+    　　　　　　minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+    　　　　　　forceParse: 0
+          });
 </script>  

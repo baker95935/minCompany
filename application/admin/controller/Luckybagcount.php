@@ -20,13 +20,20 @@ class Luckybagcount extends Common
 		$request=request();
 		
 		$list=array();
+		$stime=$etime='';
 		
 		$sceneList=Db::table('scene')->select();
 		$this->assign('sceneList',$sceneList);
 		
 		$scene_id=$request->param('scene_id');
+		$stime=$request->param('stime');
+		$etime=$request->param('etime');
+		
 		$data=array();
 		!empty($scene_id) && $data['scene_id']=$scene_id;
+		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
+		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
+		
 		$this->assign('scene_id',$scene_id);
 
 	 
@@ -36,9 +43,11 @@ class Luckybagcount extends Common
 		    ->where($data)
 		    ->paginate(10);
 		    
-	  
 	 
   		$this->assign('list',$list);
+  		$this->assign('stime',$stime);
+  		$this->assign('etime',$etime);
+  		
 		return view();
 	}
 	
@@ -48,8 +57,14 @@ class Luckybagcount extends Common
 		$request=request();
 		
 		$scene_id=$request->param('scene_id');
+		$stime=$request->param('stime');
+		$etime=$request->param('etime');
+		
 		$data=array();
 		!empty($scene_id) && $data['scene_id']=$scene_id;
+		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
+		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
+		
 		
 		// Set document properties
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
