@@ -33,6 +33,11 @@ class Luckybagcount extends Common
 		!empty($scene_id) && $data['scene_id']=$scene_id;
 		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
 		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
+ 		
+ 
+		if(!empty($stime) && !empty($etime)) {
+			$data['create_time']=['between time',[$stime,$etime]];
+		}
 		
 		$this->assign('scene_id',$scene_id);
 
@@ -42,8 +47,7 @@ class Luckybagcount extends Common
 		    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
 		    ->where($data)
 		    ->paginate(10);
-		    
-	 
+
   		$this->assign('list',$list);
   		$this->assign('stime',$stime);
   		$this->assign('etime',$etime);
@@ -65,6 +69,9 @@ class Luckybagcount extends Common
 		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
 		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
 		
+		if(!empty($stime) && !empty($etime)) {
+			$data['create_time']=['between time',[$stime,$etime]];
+		}
 		
 		// Set document properties
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")

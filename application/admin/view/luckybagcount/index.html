@@ -11,8 +11,8 @@
 {/foreach}
 </select>
 &nbsp;&nbsp;
-时间:<input   class="form_datetime" type="text" name="stime" id="start_time" value="{$stime}">~
-<input   class="form_datetime" type="text" name="etime" id="end_time" value="{$etime}">
+时间:<input   class="form_datetime" type="text" name="stime" id="stime" value="{$stime}">~
+<input   class="form_datetime" type="text" name="etime" id="etime" value="{$etime}">
 
 <input type="submit" value="查询">
 </form> 
@@ -61,7 +61,7 @@
 <script type="text/javascript" src="__ROOT__static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="__ROOT__static/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript">
-    $(".form_datetime").datetimepicker({　
+    $("#stime").datetimepicker({　
     	　　format: 'yyyy-mm-dd',
     　　　　　　language: 'zh-CN',
     　　　　　　weekStart: 1,
@@ -70,6 +70,28 @@
     　　　　　　todayHighlight: 1,
     　　　　　　startView: 2,
     　　　　　　minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-    　　　　　　forceParse: 0
-          });
+    　　　　　　forceParse: 0,
+             endDate: new Date(),
+     }).on('changeDate',function(ev){
+         var starttime=$("#stime").val();
+         $("#etime").datetimepicker('setStartDate',starttime);
+	});
+    
+    $("#etime").datetimepicker({　
+  	　　format: 'yyyy-mm-dd',
+  　　　　　　language: 'zh-CN',
+  　　　　　　weekStart: 1,
+  　　　　　　todayBtn: 1,//显示‘今日’按钮
+  　　　　　　autoclose: 1,
+  　　　　　　todayHighlight: 1,
+  　　　　　　startView: 2,
+  　　　　　　minView: 2,  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+  　　　　　　forceParse: 0,
+           endDate: new Date(),
+   }).on('changeDate',function(ev){
+       var starttime=$("#stime").val();
+       var endtime=$("#etime").val();
+       $("#stime").datetimepicker('setEndDate',endtime);
+  });
+    
 </script>  
