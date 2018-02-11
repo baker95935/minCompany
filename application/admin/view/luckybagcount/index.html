@@ -75,6 +75,7 @@
      }).on('changeDate',function(ev){
          var starttime=$("#stime").val();
          $("#etime").datetimepicker('setStartDate',starttime);
+         $("#stime").datetimepicker('hide');
 	});
     
     $("#etime").datetimepicker({　
@@ -92,6 +93,7 @@
        var starttime=$("#stime").val();
        var endtime=$("#etime").val();
        $("#stime").datetimepicker('setEndDate',endtime);
+       $("#etime").datetimepicker('hide'); 
   });
     
 </script>  
