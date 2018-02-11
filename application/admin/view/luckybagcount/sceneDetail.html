@@ -1,11 +1,10 @@
 {layout name="layout" /}
 <h2>统计管理 &nbsp; &nbsp; &nbsp;<small>
-<a href="{:url('/admin/Luckybagcount/excelAll/scene_id/'.$scene_id.'/stime/'.$stime.'/etime/'.$etime)} ">导出全部</a></small></h2>
+<a href="{:url('/admin/Luckybagcount/excelSceneDetail/scene_id/'.$scene_id.'/stime/'.$stime.'/etime/'.$etime)} ">导出全部</a></small></h2>
  <br>
- <form action="{:url('/admin/Luckybagcount/index')}" method="POST">
+ <form action="{:url('/admin/Luckybagcount/sceneDetail')}" method="POST">
 场景:
 <select name="scene_id" id="scene_id">
-<option value="0">全部</option>
 {foreach name="sceneList" item="item"}
 <option value="{$item.id}" {if condition="$scene_id eq $item.id"} selected="selected" {/if} >{$item.name}</option>
 {/foreach}
@@ -22,6 +21,7 @@
    <thead>
      <tr>
        <th>场景</th>
+       <th>日期</th>
        <th>流量(PV)</th>
        <th>访客量(uv)</th>
        <th>福袋点击量</th>
@@ -34,12 +34,13 @@
      </tr>
    </thead>
    <tbody>
-   {if condition="empty($scene_id)"}
-   <tr><td>总计</td><td>{$total_pv}</td><td>{$total_uv}</td><td>{$total_luckybag}</td><td>{$total_adviser}</td><td>{$total_testdrive}</td><td>{$total_buy}</td><td>{$total_activity}</td><td>{$total_finance}</td><td>{$total_substitution}</td></tr>
-   {/if}  
+ 
+   <tr><td>总计</td><td>日期</td><td>{$total_pv}</td><td>{$total_uv}</td><td>{$total_luckybag}</td><td>{$total_adviser}</td><td>{$total_testdrive}</td><td>{$total_buy}</td><td>{$total_activity}</td><td>{$total_finance}</td><td>{$total_substitution}</td></tr>
+ 
    {foreach $list as $vo}
      <tr>
-       <td><a href="{:url('/admin/Luckybagcount/sceneDetail/scene_id/'.$vo.scene_id)}">{$vo.scene_id|getSceneNameById}</a></td>
+       <td><a href="{:url('/admin/Luckybagcount/sceneDetail/'.$vo.scene_id)}">{$vo.scene_id|getSceneNameById}</a></td>
+       <td>{$vo.day}</td>
        <td>{$vo.pv}</td>
        <td>{$vo.uv}</td>
        <td>{$vo.luckybag_click_total}</td>
