@@ -12,6 +12,7 @@ use app\admin\controller\Common;
 
 use app\admin\model\Luckybagcount as luckybagcountModel;
 use app\admin\model\Luckybag as luckybagModel;
+use app\admin\model\Scene as sceneModel;
 
 class Luckybagcount extends Common
 {
@@ -30,13 +31,17 @@ class Luckybagcount extends Common
 		$etime=$request->param('etime');
 		
 		$data=array();
-		!empty($scene_id) && $data['scene_id']=$scene_id;
-		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
-		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
+		$scene_id>0 && $data['scene_id']=$scene_id;
+		$stime>0 && $data['create_time']=['>=',strtotime($stime)];
+		if($etime>0){
+			$oneday=60*60*24;
+			$endtime=strtotime($etime)+$oneday;
+			$data['create_time']=['<=',$endtime];
+		}
  		
  
-		if(!empty($stime) && !empty($etime)) {
-			$data['create_time']=['between time',[$stime,$etime]];
+		if(!empty($stime) && !empty($endtime)) {
+			$data['create_time']=['between time',[$stime,$endtime]];
 		}
 		
 		$this->assign('scene_id',$scene_id);
@@ -59,20 +64,28 @@ class Luckybagcount extends Common
 	{
 		$objPHPExcel = new PHPExcel();
 		$request=request();
+		$stime=$etime='';
 		
 		$scene_id=$request->param('scene_id');
 		$stime=$request->param('stime');
 		$etime=$request->param('etime');
 		
 		$data=array();
-		!empty($scene_id) && $data['scene_id']=$scene_id;
-		!empty($stime) && $data['create_time']=['>=',strtotime($stime)];
-		!empty($etime) && $data['create_time']=['<=',strtotime($etime)];
+		$scene_id>0 && $data['scene_id']=$scene_id;
+		$stime>0 && $data['create_time']=['>=',strtotime($stime)];
 		
-		if(!empty($stime) && !empty($etime)) {
-			$data['create_time']=['between time',[$stime,$etime]];
+		if($etime>0){
+			$oneday=60*60*24;
+			$endtime=strtotime($etime)+$oneday;
+			$data['create_time']=['<=',$endtime];
+		}
+ 		
+ 
+		if(!empty($stime) && !empty($endtime)) {
+			$data['create_time']=['between time',[$stime,$endtime]];
 		}
 		
+		 
 		// Set document properties
 		$objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
 							 ->setLastModifiedBy("Maarten Balliauw")
@@ -106,7 +119,7 @@ class Luckybagcount extends Common
 	 		$i=2;
 	 		$scene_name='全部';
 	 		if($scene_id) {
-	 			$tmp=luckybagModel::get($scene_id);
+	 			$tmp=sceneModel::get($scene_id);
 	 			$scene_name=$tmp['name'];
 	 		}
 	 		
