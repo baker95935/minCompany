@@ -21,7 +21,7 @@ class Luckybagcount extends Common
 		$request=request();
 		
 		$list=array();
-		$stime=$etime='';
+		$scene_id=$stime=$etime=0;
 		
 		$sceneList=Db::table('scene')->select();
 		$this->assign('sceneList',$sceneList);
@@ -46,13 +46,41 @@ class Luckybagcount extends Common
 		
 		$this->assign('scene_id',$scene_id);
 
-	 
 			$list=	Db::table('luckybagcount')
-		    ->field('DATE(FROM_UNIXTIME(create_time)) AS day,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
-		    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
+		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
+		    ->group('scene_id DESC')
 		    ->where($data)
-		    ->paginate(10);
-
+		    ->paginate(20);
+			
+		if(!$scene_id) {
+			//获取总算
+			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=0;
+			foreach($list as $k=>$v)
+			{
+				$total_pv+=$v['pv'];	
+				$total_uv+=$v['uv'];
+				$total_luckybag+=$v['luckybag_click_total'];
+				$total_adviser+=$v['adviser_click_total'];
+				$total_testdrive+=$v['testdrive_click_total'];
+				$total_buy+=$v['buy_click_total'];
+				
+				$total_activity+=$v['activity_click_total'];
+				$total_finance+=$v['finance_click_total'];
+				$total_substitution+=$v['substitution_click_total'];
+			}
+		
+			$this->assign('total_pv',$total_pv);
+			$this->assign('total_uv',$total_uv);
+			$this->assign('total_luckybag',$total_luckybag);
+			$this->assign('total_adviser',$total_adviser);
+			$this->assign('total_testdrive',$total_testdrive);
+			$this->assign('total_buy',$total_buy);
+			$this->assign('total_activity',$total_activity);
+			$this->assign('total_finance',$total_finance);
+			$this->assign('total_substitution',$total_substitution);
+		
+		}
+		
   		$this->assign('list',$list);
   		$this->assign('stime',$stime);
   		$this->assign('etime',$etime);
@@ -98,7 +126,6 @@ class Luckybagcount extends Common
 
 			// Add some data
 			$objPHPExcel->setActiveSheetIndex(0)
-			            ->setCellValue('A1', '日期')
 			            ->setCellValue('B1', '场景')
 			            ->setCellValue('C1', '流量(PV)')
 			            ->setCellValue('D1', '访客量(uv)')
@@ -110,25 +137,51 @@ class Luckybagcount extends Common
 					    ->setCellValue('J1', '金融点击量')
 					    ->setCellValue('K1', '置换点击量');
 
- 	  		$list=	Db::table('luckybagcount')
-		    ->field('DATE(FROM_UNIXTIME(create_time)) AS day,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
-		    ->group('DATE(FROM_UNIXTIME(create_time)) DESC')
+			$list=	Db::table('luckybagcount')
+		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
+		    ->group('scene_id DESC')
 		    ->where($data)
 	 		->select();
 	 		
-	 		$i=2;
-	 		$scene_name='全部';
-	 		if($scene_id) {
-	 			$tmp=sceneModel::get($scene_id);
-	 			$scene_name=$tmp['name'];
-	 		}
-	 		
+			$i=2;
+			if($scene_id=='stime') {
+				//获取总数
+				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=0;
+				foreach($list as $k=>$v)
+				{
+					$total_pv+=$v['pv'];
+					$total_uv+=$v['uv'];
+					$total_luckybag+=$v['luckybag_click_total'];
+					$total_adviser+=$v['adviser_click_total'];
+					$total_testdrive+=$v['testdrive_click_total'];
+					$total_buy+=$v['buy_click_total'];
+						
+					$total_activity+=$v['activity_click_total'];
+					$total_finance+=$v['finance_click_total'];
+					$total_substitution+=$v['substitution_click_total'];
+				}
+				
+				//总数列
+				$objPHPExcel->setActiveSheetIndex(0)
+				->setCellValue('B2', '总数')
+				->setCellValue('C2', $total_pv)
+				->setCellValue('D2', $total_uv)
+				->setCellValue('E2', $total_luckybag)
+				->setCellValue('F2', $total_adviser)
+				->setCellValue('G2', $total_testdrive)
+				->setCellValue('H2', $total_buy)
+				->setCellValue('I2', $total_activity)
+				->setCellValue('J2', $total_finance)
+				->setCellValue('K2', $total_substitution);
+				
+				$i++;
+			}
+			
 	 		
 	 		foreach($list as $k=>$v)
 	 		{
  				$objPHPExcel->setActiveSheetIndex(0)
-		            ->setCellValue('A'.$i,$v['day'])
-		            ->setCellValue('B'.$i,$scene_name)
+		            ->setCellValue('B'.$i,getSceneNameById($v['scene_id']))
 		            ->setCellValue('C'.$i,$v['pv'])
 		            ->setCellValue('D'.$i,$v['uv'])
 		            ->setCellValue('E'.$i,$v['luckybag_click_total'])
