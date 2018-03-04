@@ -51,7 +51,7 @@ class Luckybagcount extends Common
 		    ->group('scene_id ASC')
 		    ->where($data)
 		    ->order('scene_id ASC')
-		    ->paginate(20);
+		    ->paginate(25);
 			
 		if(!$scene_id) {
 			//获取总算
