@@ -50,6 +50,7 @@ class Luckybagcount extends Common
 		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
 		    ->group('scene_id ASC')
 		    ->where($data)
+		    ->where('scene_id>0')
 		    ->order('scene_id ASC')
 		    ->paginate(25);
 			
@@ -58,7 +59,7 @@ class Luckybagcount extends Common
 			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=0;
 			
 			
-			$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->find();
+			$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->where('scene_id>0')->find();
 			$total_uv=$tmp['uv'];	
 		  
 			
@@ -148,6 +149,7 @@ class Luckybagcount extends Common
 		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
 		    ->group('scene_id ASC')
 		    ->where($data)
+		    ->where('scene_id>0')
 	 		->select();
 	 		
 			$i=2;
@@ -155,7 +157,7 @@ class Luckybagcount extends Common
 				//获取总数
 				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=0;
 				
-				$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->find();
+				$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->where('scene_id>0')->find();
 				$total_uv=$tmp['uv'];	
 					
 				foreach($list as $k=>$v)
