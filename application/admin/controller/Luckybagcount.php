@@ -57,7 +57,9 @@ class Luckybagcount extends Common
 			//获取总算
 			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=0;
 			
-			$total_uv=	Db::table('luckybagcount')->field('distinct ipaddr')->count();
+			
+			$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->find();
+			$total_uv=$tmp['uv'];	
 		  
 			
 			foreach($list as $k=>$v)
@@ -153,7 +155,8 @@ class Luckybagcount extends Common
 				//获取总数
 				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=0;
 				
-				$total_uv=	Db::table('luckybagcount')->field('distinct ipaddr')->count();
+				$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->find();
+				$total_uv=$tmp['uv'];	
 					
 				foreach($list as $k=>$v)
 				{
