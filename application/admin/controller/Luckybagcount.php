@@ -188,19 +188,19 @@ class Luckybagcount extends Common
 	 		
 	 		foreach($list as $k=>$v)
 	 		{
+	 			
+	 			$v['luckybag_click_total']==0 && $v['luckybag_click_total']='--';
+		        $v['adviser_click_total']==0 && $v['adviser_click_total']='--';
+		        $v['testdrive_click_total']==0 && $v['testdrive_click_total']='--';
+		        $v['buy_click_total']==0 && $v['buy_click_total']='--';
+		        $v['activity_click_total']==0 && $v['activity_click_total']='--';
+		        $v['finance_click_total']==0 && $v['finance_click_total']='--';
+		        $v['substitution_click_total']==0 && $v['substitution_click_total']='--';
+		             
  				$objPHPExcel->setActiveSheetIndex(0)
 		            ->setCellValue('B'.$i,getSceneNameById($v['scene_id']))
 		            ->setCellValue('C'.$i,$v['pv'])
 		            ->setCellValue('D'.$i,$v['uv'])
-		             
-		             $v['luckybag_click_total']==0 && $v['luckybag_click_total']='--';
-		             $v['adviser_click_total']==0 && $v['adviser_click_total']='--';
-		             $v['testdrive_click_total']==0 && $v['testdrive_click_total']='--';
-		             $v['buy_click_total']==0 && $v['buy_click_total']='--';
-		             $v['activity_click_total']==0 && $v['activity_click_total']='--';
-		             $v['finance_click_total']==0 && $v['finance_click_total']='--';
-		             $v['substitution_click_total']==0 && $v['substitution_click_total']='--';
-		             
 		            ->setCellValue('E'.$i,$v['luckybag_click_total'])
 				    ->setCellValue('F'.$i,$v['adviser_click_total'])
 				    ->setCellValue('G'.$i,$v['testdrive_click_total'])
