@@ -42,13 +42,15 @@
        <td><a href="{:url('/admin/Luckybagcount/sceneDetail/scene_id/'.$vo.scene_id)}">{$vo.scene_id|getSceneNameById}</a></td>
        <td>{$vo.pv}</td>
        <td>{$vo.uv}</td>
-       <td>{$vo.luckybag_click_total}</td>
-       <td>{$vo.adviser_click_total}</td>
-       <td>{$vo.testdrive_click_total}</td>
-       <td>{$vo.buy_click_total}</td>
-       <td>{$vo.activity_click_total}</td>
-       <td>{$vo.finance_click_total}</td>
-       <td>{$vo.substitution_click_total}</td>
+       
+       <td>{if condition="$vo.luckybag_click_total gt 0"}{$vo.luckybag_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.adviser_click_total gt 0"}{$vo.adviser_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.testdrive_click_total gt 0"}{$vo.testdrive_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.buy_click_total gt 0"}{$vo.buy_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.activity_click_total gt 0"}{$vo.activity_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.finance_click_total gt 0"}{$vo.finance_click_total} {else /}-- {/if}</td>
+       <td>{if condition="$vo.substitution_click_total gt 0"}{$vo.substitution_click_total} {else /}-- {/if}</td>
+       
      </tr>
      {/foreach}
    </tbody>

@@ -50,15 +50,20 @@ class Luckybagcount extends Common
 		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
 		    ->group('scene_id ASC')
 		    ->where($data)
+		    ->order('scene_id ASC');
 		    ->paginate(20);
 			
 		if(!$scene_id) {
 			//获取总算
 			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=0;
+			
+			$total_uv=	Db::table('luckybagcount')->field('distinct ipaddr')->count();
+		  
+			
 			foreach($list as $k=>$v)
 			{
 				$total_pv+=$v['pv'];	
-				$total_uv+=$v['uv'];
+				//$total_uv+=$v['uv'];
 				$total_luckybag+=$v['luckybag_click_total'];
 				$total_adviser+=$v['adviser_click_total'];
 				$total_testdrive+=$v['testdrive_click_total'];
@@ -147,10 +152,13 @@ class Luckybagcount extends Common
 			if($scene_id=='stime') {
 				//获取总数
 				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=0;
+				
+				$total_uv=	Db::table('luckybagcount')->field('distinct ipaddr')->count();
+					
 				foreach($list as $k=>$v)
 				{
 					$total_pv+=$v['pv'];
-					$total_uv+=$v['uv'];
+					//$total_uv+=$v['uv'];
 					$total_luckybag+=$v['luckybag_click_total'];
 					$total_adviser+=$v['adviser_click_total'];
 					$total_testdrive+=$v['testdrive_click_total'];
@@ -184,6 +192,15 @@ class Luckybagcount extends Common
 		            ->setCellValue('B'.$i,getSceneNameById($v['scene_id']))
 		            ->setCellValue('C'.$i,$v['pv'])
 		            ->setCellValue('D'.$i,$v['uv'])
+		             
+		             $v['luckybag_click_total']==0 && $v['luckybag_click_total']='--';
+		             $v['adviser_click_total']==0 && $v['adviser_click_total']='--';
+		             $v['testdrive_click_total']==0 && $v['testdrive_click_total']='--';
+		             $v['buy_click_total']==0 && $v['buy_click_total']='--';
+		             $v['activity_click_total']==0 && $v['activity_click_total']='--';
+		             $v['finance_click_total']==0 && $v['finance_click_total']='--';
+		             $v['substitution_click_total']==0 && $v['substitution_click_total']='--';
+		             
 		            ->setCellValue('E'.$i,$v['luckybag_click_total'])
 				    ->setCellValue('F'.$i,$v['adviser_click_total'])
 				    ->setCellValue('G'.$i,$v['testdrive_click_total'])
@@ -191,6 +208,7 @@ class Luckybagcount extends Common
 				    ->setCellValue('I'.$i,$v['activity_click_total'])
 				    ->setCellValue('J'.$i,$v['finance_click_total'])
 				    ->setCellValue('K'.$i,$v['substitution_click_total']);	
+				    
 				$i++;
 	 		}
  
