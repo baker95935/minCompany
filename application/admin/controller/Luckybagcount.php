@@ -165,6 +165,9 @@ class Luckybagcount extends Common
 					$total_pv+=$v['pv'];
 					//$total_uv+=$v['uv'];
 					$total_luckybag+=$v['luckybag_click_total'];
+
+					$total_luckybag==0 && $total_luckybag='--';
+
 					$total_adviser+=$v['adviser_click_total'];
 					$total_testdrive+=$v['testdrive_click_total'];
 					$total_buy+=$v['buy_click_total'];
