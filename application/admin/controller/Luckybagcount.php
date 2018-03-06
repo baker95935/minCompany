@@ -145,7 +145,7 @@ class Luckybagcount extends Common
 					    ->setCellValue('I1', '活动点击量')
 					    ->setCellValue('J1', '金融点击量')
 					    ->setCellValue('K1', '置换点击量')
-					    ->setCellValue('L1', '服务点击量')
+					    ->setCellValue('L1', '服务点击量');
 					    
 
 			$list=	Db::table('luckybagcount')
