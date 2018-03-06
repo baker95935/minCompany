@@ -3,7 +3,7 @@
 use think\migration\Migrator;
 use think\migration\db\Column;
 
-class ModifyLuckybagcountTable extends Migrator
+class ModifyLuckybagcountrepeatTable extends Migrator
 {
     /**
      * Change Method.
@@ -28,8 +28,8 @@ class ModifyLuckybagcountTable extends Migrator
      */
     public function change()
     {
-			$this->table('luckybagcount',['engine'=>'MyISAM'])
-			->addColumn(Column::integer('luckybag_id')->setDefault(0)->setComment('¸£´üidµã»÷'))
-	    	->update();
+            $this->table('luckybagcount',['engine'=>'MyISAM'])
+            ->addColumn(Column::integer('service_click')->setDefault(0)->setComment('服务点击量'))
+            ->update();
     }
 }

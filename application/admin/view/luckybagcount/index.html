@@ -31,6 +31,7 @@
        <th>活动点击量</th>
        <th>金融点击量</th>
        <th>置换点击量</th>
+       <th>服务点击量</th>
      </tr>
    </thead>
    <tbody>
@@ -53,7 +54,7 @@
        <td>{if condition="$vo.activity_click_total gt 0"}{$vo.activity_click_total} {else /}-- {/if}</td>
        <td>{if condition="$vo.finance_click_total gt 0"}{$vo.finance_click_total} {else /}-- {/if}</td>
        <td>{if condition="$vo.substitution_click_total gt 0"}{$vo.substitution_click_total} {else /}-- {/if}</td>
-      
+       <td>{if condition="$vo.service_click_total gt 0"}{$vo.service_click_total} {else /}-- {/if}</td>
      </tr>
     
      {/foreach}

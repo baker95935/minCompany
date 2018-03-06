@@ -47,16 +47,15 @@ class Luckybagcount extends Common
 		$this->assign('scene_id',$scene_id);
 
 			$list=	Db::table('luckybagcount')
-		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
+		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total,SUM(service_click) AS service_click_total')
 		    ->group('scene_id ASC')
 		    ->where($data)
-		    ->where('scene_id>0')
 		    ->order('scene_id ASC')
 		    ->paginate(25);
 			
 		if(!$scene_id) {
 			//获取总算
-			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=0;
+			$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_testdrive=$total_finance=$total_substitution=$total_service=0;
 			
 			
 			$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->where('scene_id>0')->find();
@@ -75,6 +74,7 @@ class Luckybagcount extends Common
 				$total_activity+=$v['activity_click_total'];
 				$total_finance+=$v['finance_click_total'];
 				$total_substitution+=$v['substitution_click_total'];
+				total_service+=$v['service_click_total'];
 			}
 		
 			$this->assign('total_pv',$total_pv);
@@ -86,6 +86,7 @@ class Luckybagcount extends Common
 			$this->assign('total_activity',$total_activity);
 			$this->assign('total_finance',$total_finance);
 			$this->assign('total_substitution',$total_substitution);
+			$this->assign('total_service',$total_service);
 		
 		}
 		
@@ -143,10 +144,12 @@ class Luckybagcount extends Common
 					    ->setCellValue('H1', '订购点击量')
 					    ->setCellValue('I1', '活动点击量')
 					    ->setCellValue('J1', '金融点击量')
-					    ->setCellValue('K1', '置换点击量');
+					    ->setCellValue('K1', '置换点击量')
+					    ->setCellValue('L1', '服务点击量')
+					    
 
 			$list=	Db::table('luckybagcount')
-		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total')
+		    ->field('scene_id,count(id) as pv,count(distinct ipaddr) as uv,SUM(luckybag_click) AS luckybag_click_total,SUM(adviser_click) AS adviser_click_total,SUM(testdrive_click) AS testdrive_click_total,SUM(buy_click) AS buy_click_total,SUM(activity_click) AS activity_click_total,SUM(finance_click) AS finance_click_total,SUM(substitution_click) AS substitution_click_total,SUM(service_click) AS service_click_total')
 		    ->group('scene_id ASC')
 		    ->where($data)
 		    ->where('scene_id>0')
@@ -155,7 +158,7 @@ class Luckybagcount extends Common
 			$i=2;
 			if($scene_id=='stime') {
 				//获取总数
-				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=0;
+				$total_pv=$total_uv=$total_luckybag=$total_adviser=$total_testdrive=$total_buy=$total_activity=$total_finance=$total_substitution=$total_service=0;
 				
 				$tmp=Db::table('luckybagcount')->field('count(distinct ipaddr) as uv ')->where('scene_id>0')->find();
 				$total_uv=$tmp['uv'];	
@@ -175,6 +178,7 @@ class Luckybagcount extends Common
 					$total_activity+=$v['activity_click_total'];
 					$total_finance+=$v['finance_click_total'];
 					$total_substitution+=$v['substitution_click_total'];
+					$total_service+=$v['service_click_total'];
 				}
 				
 				//总数列
@@ -189,6 +193,7 @@ class Luckybagcount extends Common
 				->setCellValue('I2', $total_activity)
 				->setCellValue('J2', $total_finance)
 				->setCellValue('K2', $total_substitution);
+				->setCellValue('L2', $total_service);
 				
 				$i++;
 			}
@@ -204,6 +209,7 @@ class Luckybagcount extends Common
 		        $v['activity_click_total']==0 && $v['activity_click_total']='--';
 		        $v['finance_click_total']==0 && $v['finance_click_total']='--';
 		        $v['substitution_click_total']==0 && $v['substitution_click_total']='--';
+		        $v['service_click_total']==0 && $v['service_click_total']='--';
 		             
  				$objPHPExcel->setActiveSheetIndex(0)
 		            ->setCellValue('B'.$i,getSceneNameById($v['scene_id']))
@@ -215,7 +221,8 @@ class Luckybagcount extends Common
 				    ->setCellValue('H'.$i,$v['buy_click_total'])
 				    ->setCellValue('I'.$i,$v['activity_click_total'])
 				    ->setCellValue('J'.$i,$v['finance_click_total'])
-				    ->setCellValue('K'.$i,$v['substitution_click_total']);	
+				    ->setCellValue('K'.$i,$v['substitution_click_total'])
+				    ->setCellValue('L'.$i,$v['service_click_total']);	
 				    
 				$i++;
 	 		}
