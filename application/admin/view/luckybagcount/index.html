@@ -38,7 +38,9 @@
    {if condition="empty($scene_id)"}
    <tr><td>总计</td><td>{$total_pv}</td><td>{$total_uv}</td>
     <td>{if condition="$total_luckybag gt 0"}{$total_luckybag} {else /}-- {/if}</td>
-    <td>{$total_adviser}</td><td>{$total_testdrive}</td><td>{$total_buy}</td><td>{$total_activity}</td><td>{$total_finance}</td><td>{$total_substitution}</td></tr>
+    <td>{$total_adviser}</td><td>{$total_testdrive}</td><td>{$total_buy}</td><td>{$total_activity}</td><td>{$total_finance}</td><td>{$total_substitution}</td>
+     <td>{$total_service}</td>
+  </tr>
    {/if}  
    {foreach $list as $vo}
    
