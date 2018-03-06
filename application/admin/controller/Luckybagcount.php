@@ -74,7 +74,7 @@ class Luckybagcount extends Common
 				$total_activity+=$v['activity_click_total'];
 				$total_finance+=$v['finance_click_total'];
 				$total_substitution+=$v['substitution_click_total'];
-				total_service+=$v['service_click_total'];
+				$total_service+=$v['service_click_total'];
 			}
 		
 			$this->assign('total_pv',$total_pv);
