@@ -192,7 +192,7 @@ class Luckybagcount extends Common
 				->setCellValue('H2', $total_buy)
 				->setCellValue('I2', $total_activity)
 				->setCellValue('J2', $total_finance)
-				->setCellValue('K2', $total_substitution);
+				->setCellValue('K2', $total_substitution)
 				->setCellValue('L2', $total_service);
 				
 				$i++;
