@@ -145,6 +145,7 @@ class Api extends Controller
 			'activity_click'=>$request->param('activity_click'),
 			'finance_click'=>$request->param('finance_click'),
 			'substitution_click'=>$request->param('substitution_click'),
+            'service_click'=>$request->param('service_click'),
 		);
 		
 		empty($data['scene_id']) && $data['scene_id']=0;
@@ -156,6 +157,7 @@ class Api extends Controller
 		empty($data['finance_click']) && $data['finance_click']=0;
 		empty($data['substitution_click']) && $data['substitution_click']=0;
         empty($data['luckybag_id']) && $data['luckybag_id']=0;
+        empty($data['service_click']) && $data['service_click']=0;
 		
 		
 		if(!empty($data['ipaddr'])) {
