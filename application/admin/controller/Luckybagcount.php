@@ -31,6 +31,7 @@ class Luckybagcount extends Common
 		$etime=$request->param('etime');
 		
 		$data=array();
+		$data['scene_id']=['>',-1];
 		$scene_id>0 && $data['scene_id']=$scene_id;
 		$stime>0 && $data['create_time']=['>=',strtotime($stime)];
 		if($etime>0){
@@ -108,6 +109,7 @@ class Luckybagcount extends Common
 		$etime=$request->param('etime');
 		
 		$data=array();
+		$data['scene_id']=['>',-1];
 		$scene_id>0 && $data['scene_id']=$scene_id;
 		$stime>0 && $data['create_time']=['>=',strtotime($stime)];
 		
